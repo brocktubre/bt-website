@@ -16,12 +16,12 @@ export class AppComponent {
               private authService: AuthService,
               private router: Router,
               private firehose: FirehoseSandboxService,
-              private kinesis: KinesisSandboxService) {
-  }
+              private kinesis: KinesisSandboxService) {}
+
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );
   }
-  
+
   // @HostListener('mousemove', ['$event'])
   // onMousemove(event: MouseEvent) {
   //   const payload = {
