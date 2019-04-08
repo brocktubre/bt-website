@@ -1,5 +1,4 @@
-import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandbox.service';
-import { KinesisSandboxService } from './shared/kinesis-sandbox/kinesis-sandbox.service';
+  import { KinesisSandboxService } from './shared/kinesis-sandbox/kinesis-sandbox.service';
 import { AuthService } from './shared/auth/auth.service';
 import { Component, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -14,9 +13,7 @@ export class AppComponent {
 
   constructor(private titleService: Title,
               private authService: AuthService,
-              private router: Router,
-              private firehose: FirehoseSandboxService,
-              private kinesis: KinesisSandboxService) {}
+              private router: Router) {}
 
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );
