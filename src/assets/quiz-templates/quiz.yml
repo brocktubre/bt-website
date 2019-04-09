@@ -1,0 +1,28 @@
+---
+guid​: guid
+    ​level:​ deepdive
+    ​domain:
+    - concepts
+    - implementationDeployment
+    course:
+    - aws-csa
+    - aws-sysops
+    ​section:
+    - Data Collection Concepts
+    lesson:
+    - Data Collection
+    ​difficulty:​ M
+    ​questiontype​: '​3​'
+    ​question:​ You are a ML specialist within a large organization who helps job seekers find both technical and non-technical jobs. You've collected data from a data warehouse from an engineering company to determine which skills qualify job seekers for different positions.  After reviewing the data you realise the data is biased. Why?
+    ​answers:
+    - text: 'The data collected needs to be from the general population of job seekers, not just from a technical engineering company.'
+    correct: true
+    - text: 'The data collected is only a few hundred observations making it bias to a small subset of job types. '
+    - text: 'The data collected has missing values for different skills for job seekers'
+    - text: 'The data collected only has a few attributes. Attributes like skills and job title are not included in the data.'
+    ​explanation:​ It's important to know what type of questions we are trying to solve. Since our organization helps both technical and non-technical job seekers, only gathering data from an engineering company is biased to those looking for technical jobs. We need to gather data from many different repositories, both technical and non-technical.
+    ​links:
+    - title: S3 Static Website Hosting
+    url: https://docs.aws.amazoncom/AmazonS3/xx.html
+    ​tags:
+    - s3
