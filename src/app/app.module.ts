@@ -31,6 +31,7 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandbox.service';
 import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
 import { ComprehendSandboxService } from './shared/comprehend-sandbox/comprehend-sandbox.service';
+import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ComprehendSandboxService } from './shared/comprehend-sandbox/comprehend
     QrReaderComponent,
     AttendanceComponent,
     GradesComponent,
-    CUHackitComponent
+    CUHackitComponent,
+    Cuhackit2020Component
 
   ],
   imports: [

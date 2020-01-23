@@ -12,6 +12,7 @@ import { AuthGuardService } from './shared/auth/auth-guard.service';
 import { AuthGuardService as AuthGuard } from './shared/auth/auth-guard.service';
 import { CallbackComponent } from './shared/callback/callback.component';
 import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
+import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.component';
 
 // Route Configuration
 export const routes: Routes = [
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: 'grades', component: GradesComponent },
     { path: 'grades/:id', component: GradesComponent },
     { path: 'cuhackit', component: CUHackitComponent },
+    { path: 'cuhackit2020', component: Cuhackit2020Component },
     { path: '**', redirectTo: '' }
 ];
 
