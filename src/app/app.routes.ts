@@ -27,6 +27,7 @@ export const routes: Routes = [
     { path: 'grades', component: GradesComponent },
     { path: 'grades/:id', component: GradesComponent },
     { path: 'cuhackit', component: CUHackitComponent },
+    { path: 'cuhackit', component: Cuhackit2020Component },
     { path: 'cuhackit2020', component: Cuhackit2020Component },
     { path: '**', redirectTo: '' }
 ];
