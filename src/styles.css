@@ -18,6 +18,11 @@ footer {
   width: 100%;
 }
 
+.spacer {
+  position:absolute;
+  bottom:0;
+}
+
 .background{
 	min-width: 100%;
 }

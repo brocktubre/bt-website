@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth.service';
 export class NavbarComponent implements OnInit {
   public isHomeActive: boolean;
   public isPortfolioActive: boolean;
+  public isPublicationsActive: boolean;
   public isAboutActive: boolean;
   public isLoginActive: boolean;
   public collapse: boolean;
@@ -42,6 +43,10 @@ export class NavbarComponent implements OnInit {
         case '/qr-reader/attendance':
           this.isPortfolioActive = true;
           this.titleService.setTitle('Portfolio | Brock Tubre');
+          break;
+        case '/publications':
+          this.isPublicationsActive = true;
+          this.titleService.setTitle('Publications | Brock Tubre');
           break;
         case '/about':
           this.isAboutActive = true;

@@ -1,3 +1,4 @@
+import { PublicationsComponent } from './publications/publications.component';
 import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
 import { GradesComponent } from './shared/grades/grades.component';
 import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
@@ -25,6 +26,7 @@ export const routes: Routes = [
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
     { path: 'grades', component: GradesComponent },
+    { path: 'publications', component: PublicationsComponent },
     { path: 'grades/:id', component: GradesComponent },
     { path: 'cuhackit2019', component: CUHackitComponent },
     { path: 'cuhackit', component: Cuhackit2020Component },

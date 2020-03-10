@@ -32,6 +32,7 @@ import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandb
 import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
 import { ComprehendSandboxService } from './shared/comprehend-sandbox/comprehend-sandbox.service';
 import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.component';
+import { PublicationsComponent } from './publications/publications.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.compon
     AttendanceComponent,
     GradesComponent,
     CUHackitComponent,
-    Cuhackit2020Component
+    Cuhackit2020Component,
+    PublicationsComponent
 
   ],
   imports: [
