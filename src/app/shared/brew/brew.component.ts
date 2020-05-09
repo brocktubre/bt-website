@@ -14,7 +14,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public loadingStats: boolean;
   public canvas: any;
   public ctx: any;
-  public latestTemp: number;
+  public latestTemp: string;
   public latestGravity: number;
   public latestReading: Date;
 
@@ -28,6 +28,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
       if (stats.length > 0) {
         console.log('There are brew stats in the Google sheet.');
         this.statsAvailable = true;
+        this.loadingStats = false;
         this.buildChart(stats);
         this.getMoreStats(stats);
       } else {
@@ -44,7 +45,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
   public getMoreStats(stats: Array<BrewStatsObj>) {
     this.latestGravity = stats[stats.length - 1].gravity;
-    this.latestTemp = stats[stats.length - 1].temperature;
+    this.latestTemp = (stats[stats.length - 1].temperature).toString() + '° F';
     this.latestReading = stats[stats.length - 1].date;
   }
 

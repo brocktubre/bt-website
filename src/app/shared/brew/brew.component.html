@@ -8,18 +8,20 @@
       </div>
     </div>
     <hr>
-    <div class="row">
-      <h3> Latest Reading: <strong>{{ latestReading }}</strong></h3>
-      <h3> Temperature: <strong>{{ latestTemp }}&#176; F</strong></h3>
-      <h3> Gravity: <strong>{{ latestGravity }}</strong></h3>
-    </div>
     <div *ngIf="loadingStats"  class="container text-center" style="min-height: 700px;">
       <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
     </div>
     <div *ngIf="!statsAvailable && !loadingStats"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
       <p> <strong>There are currrently no brew stats avalible.</strong></p>
     </div>
-    <canvas id="myChart" height="200" ></canvas>
+    <div *ngIf="!loadingStats && statsAvailable">
+      <div class="row">
+        <h3> Latest Reading: <strong>{{ latestReading }}</strong></h3>
+        <h3> Temperature: <strong>{{ latestTemp }}</strong></h3>
+        <h3> Gravity: <strong>{{ latestGravity }}</strong></h3>
+      </div>
+    </div>
+      <canvas id="myChart" height="200" ></canvas>
   </div>
 
 
