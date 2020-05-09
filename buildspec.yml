@@ -6,6 +6,7 @@ phases:
     commands:
       - printenv
       - rm -rf package-lock.json node_modules
+      - npm cache verify
       - npm install
   build:
     commands:
