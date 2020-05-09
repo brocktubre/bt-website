@@ -5,7 +5,7 @@ phases:
   install:
     commands:
       - printenv
-      - rm -rf node_modules
+      - rm -rf package-lock.json node_modules
       - npm install
   build:
     commands:
