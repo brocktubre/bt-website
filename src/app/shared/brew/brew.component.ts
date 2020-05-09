@@ -47,19 +47,83 @@ export class BrewComponent implements OnInit, AfterViewInit {
           labels: stats.map(function(stat) {
             return stat.date;
           }),
-          datasets: [{
+          datasets: [
+            {
+              label: 'Temperature',
               data: stats.map(function(stat) {
                 return stat.temperature;
               }),
-              backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-              ],
-              borderWidth: 1
-          }]
+              fill: false,
+              borderWidth: 5,
+              pointBorderWidth: 2,
+              pointBackgroundColor: 'rgba(134, 179, 218, 1)',
+              borderColor: 'rgba(44, 98, 144, 1)',
+              order: 1,
+              yAxisID: 'temp'
+
+          },
+          {
+            label: 'Gravity',
+            data: stats.map(function(stat) {
+              return stat.gravity;
+            }),
+            fill: false,
+            borderWidth: 5,
+            pointBorderWidth: 2,
+            pointBackgroundColor: 'rgba(177, 224, 154, 1)',
+            borderColor: 'rgba(67, 125, 38, 1)',
+            order: 2,
+            yAxisID: 'gravity'
+          }
+        ]
       },
-      options: {}
+      options: {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            id: 'temp',
+            type: 'linear',
+            position: 'left',
+            gridLines: {
+              display: false
+            },
+            scaleLabel: {
+              labelString: 'Temperature',
+              fontSize: 34,
+              display: true
+            },
+            ticks: {
+              fontSize: 14
+            }
+          }, {
+            id: 'gravity',
+            type: 'linear',
+            position: 'right',
+            // gridLines: {
+            //   display: false
+            // },
+            ticks: {
+              max: 1.075,
+              min: 0.999,
+              stepSize: 0.001,
+              fontSize: 14
+            },
+            scaleLabel: {
+              labelString: 'Gravity',
+              fontSize: 34,
+              display: true
+            },
+
+          }],
+          xAxes: [{
+            scaleLabel: {
+              labelString: 'Date',
+              fontSize: 34,
+              display: true
+            }
+          }]
+      }
+      }
     });
   }
 
