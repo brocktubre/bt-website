@@ -16,14 +16,17 @@
     </div>
     <div *ngIf="!loadingStats && statsAvailable">
       <div class="row">
-        <div class="col-md-6">
-          <h3> Latest Reading: <strong>{{ latestReading }}</strong></h3>
-          <h3> Temperature: <strong>{{ latestTemp }}</strong></h3>
-          <h3> Gravity: <strong>{{ latestGravity }}</strong></h3>
+        <div class="col-md-4 col-sm-12">
+          <h4>Latest Reading: <strong>{{ latestReading }}</strong></h4>
+          <h4>Fermentation Day: <strong>{{ day }}</strong></h4>
         </div>
-        <div class="col-md-6">
-          <h3> Original Gravity: <strong>{{ originalGravity }}</strong></h3>
-          <h3> Current ABV: <strong>{{ currABV }}</strong></h3>
+        <div class="col-md-4 col-sm-12">
+          <h4>Temperature: <strong>{{ latestTemp }}</strong></h4>
+          <h4>Gravity: <strong>{{ latestGravity }}</strong></h4>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <h4>Original Gravity: <strong>{{ originalGravity }}</strong></h4>
+          <h4>Current ABV: <strong>{{ currABV }}</strong></h4>
         </div>
       </div>
     </div>

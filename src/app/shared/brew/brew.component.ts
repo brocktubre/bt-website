@@ -19,6 +19,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public latestReading: Date;
   public originalGravity: number;
   public currABV: string;
+  public day: any;
 
   constructor(private brewService: BrewService) { }
 
@@ -52,7 +53,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.originalGravity = stats[0].gravity;
     // this.currABV = (OG - FG) * 131.25
     this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
-
+    this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(stats[0].date)).valueOf())/(1000*60*60*24));
   }
 
   public buildChart(stats: Array<BrewStatsObj>) {
@@ -144,7 +145,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             scaleLabel: {
               labelString: 'Reading Date & Time',
               fontSize: 24,
-              display: true
+              display: false
             },
             ticks: {
               autoSkip: false,
