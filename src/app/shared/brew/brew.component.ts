@@ -17,6 +17,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public latestTemp: string;
   public latestGravity: number;
   public latestReading: Date;
+  public originalGravity: number;
+  public currABV: string;
 
   constructor(private brewService: BrewService) { }
 
@@ -47,6 +49,10 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.latestGravity = stats[stats.length - 1].gravity;
     this.latestTemp = (stats[stats.length - 1].temperature).toString() + '° F';
     this.latestReading = stats[stats.length - 1].date;
+    this.originalGravity = stats[0].gravity;
+    // this.currABV = (OG - FG) * 131.25
+    this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
+
   }
 
   public buildChart(stats: Array<BrewStatsObj>) {
