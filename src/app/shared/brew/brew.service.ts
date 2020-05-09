@@ -31,6 +31,7 @@ export class BrewService {
               stat.temperature = reading.gsx$temperature.$t;
               brewStats.push(stat);
             });
+            brewStats[0].brew_name = results.feed.title.$t;
           }
           sendResult.next(brewStats);
           // sendResult.next(results);

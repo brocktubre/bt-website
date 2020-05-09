@@ -3,4 +3,5 @@ export class BrewStatsObj {
   public date: Date;
   public temperature: number;
   public gravity: number;
+  public brew_name: string;
 }

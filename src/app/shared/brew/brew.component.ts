@@ -2,6 +2,7 @@ import { BrewService } from './brew.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as Chart from 'chart.js';
 import { BrewStatsObj } from '../models/brew-stats-object.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-brew',
@@ -20,6 +21,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public originalGravity: number;
   public currABV: string;
   public day: any;
+  public brewName: string;
+  public brewDate: string;
 
   constructor(private brewService: BrewService) { }
 
@@ -54,6 +57,11 @@ export class BrewComponent implements OnInit, AfterViewInit {
     // this.currABV = (OG - FG) * 131.25
     this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(stats[0].date)).valueOf())/(1000*60*60*24));
+    this.brewName = stats[0].brew_name;
+    const date = moment.utc(stats[0].date);
+    date.add(1, 'month'); // date operations follow date-math logic
+    const s = date.format("MM/DD/YY");
+    this.brewDate = s;
   }
 
   public buildChart(stats: Array<BrewStatsObj>) {
