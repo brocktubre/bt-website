@@ -8,14 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrewComponent implements OnInit {
   public year: number;
-  public SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+  public statsAvailable: boolean;
+  public loadingStats: boolean;
 
   constructor(private brewService: BrewService) { }
 
   ngOnInit() {
     this.year = new Date().getFullYear();
-    this.brewService.getBrewStats().subscribe((results) => {
-      debugger;
+    this.loadingStats = true;
+    this.statsAvailable = false;
+    this.brewService.getBrewStats().subscribe((stats) => {
+      if (stats.length > 0) {
+        console.log('There are brew stats in the Google sheet.');
+        this.statsAvailable = true;
+      } else {
+        console.log('No brew stats in the Google sheet.');
+      }
+      this.loadingStats = false;
     });
   }
 

@@ -1,10 +1,20 @@
 <app-navbar></app-navbar>
 <!-- Content for the main page -->
 <div class="container-fluid background" style="padding: 0;" >
-  <div class="container text-center">
+  <div class="container">
     <div class="row">
-      <h1>Hello, World. Brewing stuff goes here.</h1>
+      <div class="col-md-12">
+          <strong><h2> <i class="fa fa-beer"></i><span class="text-primary"> BREW STATS</span></h2></strong>
+      </div>
     </div>
+    <hr>
+    <div *ngIf="loadingStats"  class="container text-center" style="min-height: 700px;">
+      <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
+    </div>
+    <div *ngIf="!statsAvailable && !loadingStats"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
+      <h3> There are currrently no brew stats avalible.</h3>
+    </div>
+
   </div>
 
 

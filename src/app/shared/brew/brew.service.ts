@@ -22,15 +22,16 @@ export class BrewService {
       const getAllBrewStats = this.http.get(getUrl, httpOptions);
       getAllBrewStats.subscribe((results: any) => {
           const brewStats = new Array<BrewStatsObj>();
-          results.feed.entry.forEach(reading => {
-            debugger;
-            const stat = new BrewStatsObj();
-            stat.reading_id = reading.gsx$readingid.$t;
-            stat.date = reading.gsx$date.$t;
-            stat.gravity = reading.gsx$gravity.$t;
-            stat.temperature = reading.gsx$temperature.$t;
-            brewStats.push(stat);
-          });
+          if (results.feed.entry !== undefined) {
+            results.feed.entry.forEach(reading => {
+              const stat = new BrewStatsObj();
+              stat.reading_id = reading.gsx$readingid.$t;
+              stat.date = reading.gsx$date.$t;
+              stat.gravity = reading.gsx$gravity.$t;
+              stat.temperature = reading.gsx$temperature.$t;
+              brewStats.push(stat);
+            });
+          }
           sendResult.next(brewStats);
           // sendResult.next(results);
       });
