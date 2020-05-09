@@ -43,6 +43,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.ctx = this.canvas.getContext('2d');
     const myChart = new Chart(this.ctx, {
       type: 'line',
+
       data: {
           labels: stats.map(function(stat) {
             return stat.date;
@@ -79,6 +80,13 @@ export class BrewComponent implements OnInit, AfterViewInit {
       },
       options: {
         responsive: true,
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            fontSize: 18,
+          }
+        },
         scales: {
           yAxes: [{
             id: 'temp',
@@ -117,11 +125,16 @@ export class BrewComponent implements OnInit, AfterViewInit {
           }],
           xAxes: [{
             scaleLabel: {
-              labelString: 'Date',
+              labelString: 'Reading Date & Time',
               fontSize: 34,
               display: true
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 15
             }
-          }]
+          }],
       }
       }
     });
