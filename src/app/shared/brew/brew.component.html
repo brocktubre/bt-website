@@ -14,7 +14,7 @@
     <div *ngIf="!statsAvailable && !loadingStats"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
       <p> <strong>There are currrently no brew stats avalible.</strong></p>
     </div>
-
+    <canvas id="myChart">{{ chart }}</canvas>
   </div>
 
 
