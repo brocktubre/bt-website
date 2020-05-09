@@ -1,3 +1,4 @@
+import { BrewService } from './brew.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrewComponent implements OnInit {
   public year: number;
-  constructor() { }
+  public SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+  constructor(private brewService: BrewService) { }
 
   ngOnInit() {
     this.year = new Date().getFullYear();
+    this.brewService.getBrewStats().subscribe((results) => {
+      debugger;
+    });
   }
+
 
 }

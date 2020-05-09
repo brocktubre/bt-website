@@ -47,5 +47,11 @@ export const environment = {
     api: {
       get_tweets: 'https://iaxktfzlre.execute-api.us-east-1.amazonaws.com/integration/get-tweets'
     }
+  },
+  brewStats: {
+    // tslint:disable-next-line:max-line-length
+    url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSwLzGAPosqMgL2iPjpERprc5T9Mfi_PAatkjwG6CSm_O0L46fuH7ddJOPUJy6PRWtLoOMhpZvbhJGD/pubhtml?gid=0&single=true',
+    // tslint:disable-next-line:max-line-length
+    jsonUrl: 'https://spreadsheets.google.com/feeds/list/1FTIzhYpEeWyCXQJBHUyuyO3F_6Bqg91qA4e_RV2mZOk/od6/public/values?alt=json'
   }
 };

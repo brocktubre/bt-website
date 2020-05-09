@@ -1,3 +1,4 @@
+import { BrewService } from './shared/brew/brew.service';
 import { KinesisSandboxService } from './shared/kinesis-sandbox/kinesis-sandbox.service';
 import { LambdaSandboxService } from './shared/lambda-sandbox/lambda-sandbox.service';
 import { QrReaderService } from './shared/qr-reader/qr-reader.service';
@@ -77,7 +78,8 @@ import { BrewComponent } from './shared/brew/brew.component';
     AuthHelper,
     KinesisSandboxService,
     FirehoseSandboxService,
-    ComprehendSandboxService
+    ComprehendSandboxService,
+    BrewService
   ],
   bootstrap: [AppComponent]
 })
