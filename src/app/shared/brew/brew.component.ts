@@ -14,6 +14,9 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public loadingStats: boolean;
   public canvas: any;
   public ctx: any;
+  public latestTemp: number;
+  public latestGravity: number;
+  public latestReading: Date;
 
   constructor(private brewService: BrewService) { }
 
@@ -26,6 +29,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
         console.log('There are brew stats in the Google sheet.');
         this.statsAvailable = true;
         this.buildChart(stats);
+        this.getMoreStats(stats);
       } else {
         console.log('No brew stats in the Google sheet.');
       }
@@ -36,6 +40,12 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // something
+  }
+
+  public getMoreStats(stats: Array<BrewStatsObj>) {
+    this.latestGravity = stats[stats.length - 1].gravity;
+    this.latestTemp = stats[stats.length - 1].temperature;
+    this.latestReading = stats[stats.length - 1].date;
   }
 
   public buildChart(stats: Array<BrewStatsObj>) {
@@ -97,7 +107,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             },
             scaleLabel: {
               labelString: 'Temperature',
-              fontSize: 34,
+              fontSize: 24,
               display: true
             },
             ticks: {
@@ -118,7 +128,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             },
             scaleLabel: {
               labelString: 'Gravity',
-              fontSize: 34,
+              fontSize: 24,
               display: true
             },
 
@@ -126,13 +136,17 @@ export class BrewComponent implements OnInit, AfterViewInit {
           xAxes: [{
             scaleLabel: {
               labelString: 'Reading Date & Time',
-              fontSize: 34,
+              fontSize: 24,
               display: true
             },
             ticks: {
               autoSkip: false,
               maxRotation: 90,
-              minRotation: 15
+              minRotation: 15,
+              max: 80,
+              min: 32,
+              stepSize: 1,
+              fontSize: 14
             }
           }],
       }

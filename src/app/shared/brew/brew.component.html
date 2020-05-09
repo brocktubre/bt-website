@@ -1,13 +1,18 @@
 <app-navbar></app-navbar>
 <!-- Content for the main page -->
 <div class="container-fluid background" style="padding: 0;" >
-  <div class="container">
+  <div class="container" style="padding-bottom: 100px;">
     <div class="row">
       <div class="col-md-12">
           <strong><h2> <i class="fa fa-beer"></i><span class="text-primary"> BREW STATS</span></h2></strong>
       </div>
     </div>
     <hr>
+    <div class="row">
+      <h3> Latest Reading: <strong>{{ latestReading }}</strong></h3>
+      <h3> Temperature: <strong>{{ latestTemp }}&#176; F</strong></h3>
+      <h3> Gravity: <strong>{{ latestGravity }}</strong></h3>
+    </div>
     <div *ngIf="loadingStats"  class="container text-center" style="min-height: 700px;">
       <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
     </div>
@@ -19,7 +24,7 @@
 
 
 <!-- [BEGIN] Footer Container -->
-<footer class="navbar-default sticky-footer" style="margin-top: 125px;">
+<footer class="navbar-default" style="margin-top: 125px;">
   <div class="container-fluid" style="padding: 5px 0 5px 0;">
     <div class="text-center">
       <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
