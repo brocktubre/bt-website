@@ -78,7 +78,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
         this.stats_G.forEach(stat => {
           let temp = stat.temperature;
           temp = ((stat.temperature - 32) / 1.8);
-          stat.temperature = temp;
+          stat.temperature = parseFloat(temp.toFixed(1));
         });
         const temp2 = (this.stats_G[this.stats_G.length - 1].temperature).toFixed(1);
         this.latestTemp = temp2.toString() + '° C';
@@ -89,7 +89,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
       this.stats_G.forEach(stat => {
         let temp = stat.temperature;
         temp = ((stat.temperature * 1.8) + 32);
-        stat.temperature = temp;
+        stat.temperature = parseFloat(temp.toFixed(1));
       });
       const temp2 = (this.stats_G[this.stats_G.length - 1].temperature).toFixed(1);
       this.latestTemp = temp2.toString() + '° F';
