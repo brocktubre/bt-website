@@ -22,8 +22,7 @@
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/bootswatch/cosmo/bootstrap.min.css",
-        "styles.css",
-        "../node_modules/ngx-ui-switch/ui-switch.component.css"
+        "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

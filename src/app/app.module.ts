@@ -35,7 +35,7 @@ import { ComprehendSandboxService } from './shared/comprehend-sandbox/comprehend
 import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { BrewComponent } from './shared/brew/brew.component';
-import { UiSwitchModule } from 'ngx-ui-switch';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 
 @NgModule({

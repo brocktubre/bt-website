@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as Chart from 'chart.js';
 import { BrewStatsObj } from '../models/brew-stats-object.model';
 import * as moment from 'moment';
-import { UiSwitchModule } from 'ngx-ui-switch';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 @Component({
   selector: 'app-brew',
