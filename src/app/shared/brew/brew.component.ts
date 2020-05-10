@@ -32,6 +32,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.statsAvailable = false;
     this.brewService.getBrewStats().subscribe((stats) => {
       if (stats.length > 0) {
+        debugger;
         console.log('There are brew stats in the Google sheet.');
         this.statsAvailable = true;
         this.loadingStats = false;
@@ -60,14 +61,14 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.brewName = stats[0].brew_name;
     const date = moment.utc(stats[0].date);
     date.add(1, 'month'); // date operations follow date-math logic
-    const s = date.format("MM/DD/YY");
+    const s = date.format('MM/DD/YY');
     this.brewDate = s;
   }
 
   public buildChart(stats: Array<BrewStatsObj>) {
-    this.canvas = document.getElementById('myChart');
+    this.canvas = document.getElementById('lineChart');
     this.ctx = this.canvas.getContext('2d');
-    const myChart = new Chart(this.ctx, {
+    const lineChart = new Chart(this.ctx, {
       type: 'line',
 
       data: {
@@ -127,7 +128,10 @@ export class BrewComponent implements OnInit, AfterViewInit {
               display: true
             },
             ticks: {
-              fontSize: 14
+              fontSize: 14,
+              max: 80,
+              min: 40,
+              stepSize: 3
             }
           }, {
             id: 'gravity',

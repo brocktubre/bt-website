@@ -29,6 +29,7 @@ export class BrewService {
               stat.date = reading.gsx$date.$t;
               stat.gravity = reading.gsx$gravity.$t;
               stat.temperature = reading.gsx$temperature.$t;
+              stat.temperature_c = (stat.temperature - 32) / 1.8;
               brewStats.push(stat);
             });
             brewStats[0].brew_name = results.feed.title.$t;
