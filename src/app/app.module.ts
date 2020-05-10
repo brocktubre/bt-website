@@ -35,6 +35,7 @@ import { ComprehendSandboxService } from './shared/comprehend-sandbox/comprehend
 import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { BrewComponent } from './shared/brew/brew.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { BrewComponent } from './shared/brew/brew.component';
     ReactiveFormsModule,
     HttpClientModule,
     MomentModule,
-    Ng2TableModule
+    Ng2TableModule,
+    UiSwitchModule
   ],
   providers: [
     Title,

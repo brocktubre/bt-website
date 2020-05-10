@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as Chart from 'chart.js';
 import { BrewStatsObj } from '../models/brew-stats-object.model';
 import * as moment from 'moment';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 @Component({
   selector: 'app-brew',
@@ -23,6 +24,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public day: any;
   public brewName: string;
   public brewDate: string;
+  public units: boolean;
+  public stats_G: Array<BrewStatsObj>;
 
   constructor(private brewService: BrewService) { }
 
@@ -32,12 +35,13 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.statsAvailable = false;
     this.brewService.getBrewStats().subscribe((stats) => {
       if (stats.length > 0) {
-        debugger;
         console.log('There are brew stats in the Google sheet.');
+        this.stats_G = stats;
+        this.units = true;
         this.statsAvailable = true;
         this.loadingStats = false;
-        this.buildChart(stats);
-        this.getMoreStats(stats);
+        this.buildChart();
+        this.getMoreStats();
       } else {
         console.log('No brew stats in the Google sheet.');
       }
@@ -50,35 +54,61 @@ export class BrewComponent implements OnInit, AfterViewInit {
     // something
   }
 
-  public getMoreStats(stats: Array<BrewStatsObj>) {
-    this.latestGravity = stats[stats.length - 1].gravity;
-    this.latestTemp = (stats[stats.length - 1].temperature).toString() + '° F';
-    this.latestReading = stats[stats.length - 1].date;
-    this.originalGravity = stats[0].gravity;
-    // this.currABV = (OG - FG) * 131.25
+  public getMoreStats() {
+    this.latestGravity = this.stats_G[this.stats_G.length - 1].gravity;
+    this.latestTemp = (this.stats_G[this.stats_G.length - 1].temperature).toString() + '° F';
+    this.latestReading = this.stats_G[this.stats_G.length - 1].date;
+    this.originalGravity = this.stats_G[0].gravity;
+    this.units = true;
     this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
-    this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(stats[0].date)).valueOf())/(1000*60*60*24));
-    this.brewName = stats[0].brew_name;
-    const date = moment.utc(stats[0].date);
+    this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
+    this.brewName = this.stats_G[0].brew_name;
+    const date = moment.utc(this.stats_G[0].date);
     date.add(1, 'month'); // date operations follow date-math logic
     const s = date.format('MM/DD/YY');
     this.brewDate = s;
   }
 
-  public buildChart(stats: Array<BrewStatsObj>) {
+  public onTempUnitChange($event) {
+    if (this.units) {
+        // Need to change to Celcius
+        this.units = false;
+        this.stats_G.forEach(stat => {
+          let temp = stat.temperature;
+          temp = ((stat.temperature - 32) / 1.8);
+          stat.temperature = temp;
+        });
+        const temp2 = (this.stats_G[this.stats_G.length - 1].temperature).toFixed(1);
+        this.latestTemp = temp2.toString() + '° C';
+        this.buildChart();
+    } else {
+      // Need to change to Fernhight
+      this.units = true;
+      this.stats_G.forEach(stat => {
+        let temp = stat.temperature;
+        temp = ((stat.temperature * 1.8) + 32);
+        stat.temperature = temp;
+      });
+      const temp2 = (this.stats_G[this.stats_G.length - 1].temperature).toFixed(1);
+      this.latestTemp = temp2.toString() + '° F';
+      this.buildChart();
+    }
+  }
+
+  public buildChart() {
     this.canvas = document.getElementById('lineChart');
     this.ctx = this.canvas.getContext('2d');
     const lineChart = new Chart(this.ctx, {
       type: 'line',
 
       data: {
-          labels: stats.map(function(stat) {
+          labels: this.stats_G.map(function(stat) {
             return stat.date;
           }),
           datasets: [
             {
               label: 'Temperature',
-              data: stats.map(function(stat) {
+              data: this.stats_G.map(function(stat) {
                 return stat.temperature;
               }),
               fill: false,
@@ -92,7 +122,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
           },
           {
             label: 'Gravity',
-            data: stats.map(function(stat) {
+            data: this.stats_G.map(function(stat) {
               return stat.gravity;
             }),
             fill: false,
@@ -123,15 +153,15 @@ export class BrewComponent implements OnInit, AfterViewInit {
               display: false
             },
             scaleLabel: {
-              labelString: 'Temperature',
+              labelString: this.units ? 'Temperature °F' : 'Temperature °C',
               fontSize: 24,
               display: true
             },
             ticks: {
               fontSize: 14,
-              max: 80,
-              min: 40,
-              stepSize: 3
+              max: this.units ? 80 : 27,
+              min: this.units ? 40 : 4,
+              stepSize: this.units ? 3 : 2
             }
           }, {
             id: 'gravity',
