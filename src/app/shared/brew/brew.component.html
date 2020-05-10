@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <!-- Content for the main page -->
 <div class="container-fluid background" style="padding: 0;" >
-  <div class="container" style="padding-bottom: 100px;">
+  <div class="container" style="padding-bottom: 50px;">
     <div class="row">
       <div class="col-md-12">
           <strong><h2> <i class="fa fa-beer"></i><span class="text-primary"> BREW STATS</span></h2></strong>
@@ -15,7 +15,7 @@
       <p> <strong>There are currrently no brew stats avalible.</strong></p>
     </div>
     <div *ngIf="!loadingStats && statsAvailable">
-      <div class="row text-center" style="padding-bottom: 50px;">
+      <div class="row text-center" style="padding-bottom: 10px;">
         <h2> <strong>{{ brewName }}</strong></h2>
         <h4><strong>Brew Date: {{ brewDate }}</strong></h4>
         <h4>Temperature Units</h4>

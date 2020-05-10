@@ -26,6 +26,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public brewDate: string;
   public units: boolean;
   public stats_G: Array<BrewStatsObj>;
+  public lineChart: any;
 
   constructor(private brewService: BrewService) { }
 
@@ -70,6 +71,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   }
 
   public onTempUnitChange($event) {
+    this.lineChart.destroy();
     if (this.units) {
         // Need to change to Celcius
         this.units = false;
@@ -98,7 +100,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public buildChart() {
     this.canvas = document.getElementById('lineChart');
     this.ctx = this.canvas.getContext('2d');
-    const lineChart = new Chart(this.ctx, {
+    this.lineChart = new Chart(this.ctx, {
       type: 'line',
 
       data: {
@@ -199,8 +201,9 @@ export class BrewComponent implements OnInit, AfterViewInit {
               fontSize: 14
             }
           }],
-      }
-      }
+        },
+        events: ['click', 'mousemove']
+      } 
     });
   }
 
