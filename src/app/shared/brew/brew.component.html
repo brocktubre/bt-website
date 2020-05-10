@@ -18,7 +18,7 @@
       <div class="row text-center" style="padding-bottom: 10px;">
         <h2> <strong>{{ brewName }}</strong></h2>
         <h4><strong>Brew Date: {{ brewDate }}</strong></h4>
-        <h4>Temperature Units</h4>
+        <h4>Temperature Units <span>{{ units ? '°F' : '°C' }}</span></h4>
         <ui-switch (change)="onTempUnitChange($event)"></ui-switch>
       </div>
       <div class="row text-center" style="padding-bottom: 50px;">
