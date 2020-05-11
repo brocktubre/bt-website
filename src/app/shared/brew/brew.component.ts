@@ -248,7 +248,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             // },
             ticks: {
               max: 1.075,
-              min: 0.900,
+              min: 0.980,
               stepSize: 0.001,
               fontSize: 14
             },
