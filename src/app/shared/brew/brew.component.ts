@@ -18,7 +18,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public ctx: any;
   public latestTemp: string;
   public latestGravity: number;
-  public latestReading: Date;
+  public latestReading: string;
   public originalGravity: number;
   public currABV: string;
   public day: any;
@@ -58,7 +58,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
         console.log('There are brew stats in the Google sheet. Number of readings: ' + num_of_readings);
 
         // Not enough data collected. Show alert warning.
-        if (num_of_readings <= 5) {
+        if (num_of_readings <= 2) {
           return;
         }
         this.enoughData = true;
@@ -130,6 +130,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.units = true;
     this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
+    this.day = this.day + 1;
     this.brewName = this.stats_G[0].brew_name;
     // All of this is depreicated for moment. Getting the following warning:
     // Deprecation warning: value provided is not in a recognized RFC2822 or ISO format.
@@ -247,7 +248,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             // },
             ticks: {
               max: 1.075,
-              min: 0.999,
+              min: 0.900,
               stepSize: 0.001,
               fontSize: 14
             },

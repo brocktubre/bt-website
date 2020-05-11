@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { environment } from '../../../environments/environment';
+import * as moment from 'moment';
 
 @Injectable()
 export class BrewService {
@@ -25,16 +26,16 @@ export class BrewService {
           if (results.feed.entry !== undefined) {
             results.feed.entry.forEach(reading => {
               const stat = new BrewStatsObj();
-              stat.reading_id = reading.gsx$readingid.$t;
-              stat.date = reading.gsx$date.$t;
-              stat.gravity = reading.gsx$gravity.$t;
-              stat.temperature = reading.gsx$temperature.$t;
+              stat.reading_id = reading.id.$t;
+              const date = moment(reading.gsx$timestamp.$t).add('3', 'hours').format('MM/DD/YY hh:mm A');
+              stat.date = date;
+              stat.gravity = reading.gsx$sg.$t;
+              stat.temperature = reading.gsx$temp.$t;
               brewStats.push(stat);
+              brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
-            brewStats[0].brew_name = results.feed.title.$t;
           }
           sendResult.next(brewStats);
-          // sendResult.next(results);
       });
       return sendResult.asObservable();
   }
