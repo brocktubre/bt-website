@@ -47,7 +47,7 @@ export const environment = {
     // tslint:disable-next-line:max-line-length
     // url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSwLzGAPosqMgL2iPjpERprc5T9Mfi_PAatkjwG6CSm_O0L46fuH7ddJOPUJy6PRWtLoOMhpZvbhJGD/pubhtml?gid=0&single=true',
     // tslint:disable-next-line:max-line-length
-    jsonUrl: 'https://spreadsheets.google.com/feeds/list/1-Vg8BwkfLaifa4_skQHUOomSIgZJtVuD1uyrdbM_xkg/3/public/values?alt=json'
+    jsonUrl: 'https://spreadsheets.google.com/feeds/list/1Aa52jIJF8PdReftE8iP0048cIpyXso_8lBJ5YocuUig/3/public/values?alt=json'
   },
   env: 'prod'
 };
