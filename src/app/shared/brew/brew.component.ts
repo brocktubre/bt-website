@@ -138,7 +138,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     // date.add(1, 'month'); // date operations follow date-math logic
     // const s = date.format('MM/DD/YY');
     // this.brewDate = s;
-    const date = moment.utc(new Date(this.stats_G[0].date)).format('MM/DD/YY');
+    const date = moment(new Date(this.stats_G[0].date)).format('MM/DD/YY');
     // date.add(1, 'month'); // date operations follow date-math logic
     this.brewDate = date;
   }
