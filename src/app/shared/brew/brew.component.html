@@ -11,7 +11,7 @@
     <div *ngIf="loadingStats"  class="container text-center" style="min-height: 700px;">
       <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
     </div>
-    <div *ngIf="!statsAvailable && !loadingStats"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
+    <div *ngIf="!statsAvailable && !loadingStats && !enoughData"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
       <p> <strong>There are currrently no brew stats avalible.</strong></p>
     </div>
     <div *ngIf="!loadingStats && statsAvailable && !enoughData"  class="container text-center alert alert-warning" style="margin-bottom: 400px;">
@@ -59,7 +59,7 @@
 
 
 <!-- [BEGIN] Footer Container -->
-<footer class="navbar-default" style="margin-top: 125px;">
+<footer class="navbar-default" [ngClass]="{'sticky-footer': enoughData === false}" style="margin-top: 125px;">
   <div class="container-fluid" style="padding: 5px 0 5px 0;">
     <div class="text-center">
       <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
