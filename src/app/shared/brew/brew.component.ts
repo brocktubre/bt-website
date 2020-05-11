@@ -72,8 +72,19 @@ export class BrewComponent implements OnInit, AfterViewInit {
           this.getMoreStats();
           return;
         }
+
         // Starts to build out what is going to be shown to the user.
         const returnResults = [];
+
+        if (num_of_results_to_show === -1) {
+          if (this.lineChart !== undefined) {
+            this.lineChart.destroy();
+          }
+          this.buildChart();
+          this.getMoreStats();
+          console.log('User wants to see ALL results: ' + this.stats_G.length);
+          return;
+        }
 
         // Creates the "skip" or hop between readings. The more readinds the greater the skip.
         const mod = Math.floor(num_of_readings / num_of_results_to_show) + 1;
@@ -246,12 +257,11 @@ export class BrewComponent implements OnInit, AfterViewInit {
               display: false
             },
             ticks: {
-              autoSkip: false,
+              autoSkip: true,
               maxRotation: 90,
               minRotation: 15,
-              max: 80,
-              min: 32,
-              stepSize: 1,
+              max: 20,
+              min: 5,
               fontSize: 14
             }
           }],
