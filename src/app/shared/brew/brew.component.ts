@@ -17,7 +17,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public canvas: any;
   public ctx: any;
   public latestTemp: string;
-  public latestGravity: number;
+  public latestGravity: string;
   public latestReading: string;
   public originalGravity: number;
   public currABV: string;
@@ -38,6 +38,10 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.statsAvailable = false;
     this.enoughData = false;
     this.filterReadings(this.num_of_results_to_show);
+    setInterval(() => {
+      debugger;
+      this.filterReadings(this.num_of_results_to_show);
+    }, 900000);
   }
 
   ngAfterViewInit() {
@@ -123,12 +127,12 @@ export class BrewComponent implements OnInit, AfterViewInit {
   }
 
   public getMoreStats() {
-    this.latestGravity = this.stats_G[this.stats_G.length - 1].gravity;
+    this.latestGravity = Number((this.stats_G[this.stats_G.length - 1].gravity)).toFixed(3).toString();
     this.latestTemp = (this.stats_G[this.stats_G.length - 1].temperature).toString() + '° F';
     this.latestReading = this.stats_G[this.stats_G.length - 1].date;
     this.originalGravity = this.stats_G[0].gravity;
     this.units = true;
-    this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
+    this.currABV = ((this.originalGravity  - this.stats_G[this.stats_G.length - 1].gravity) * 131.25).toFixed(2).toString() + '%';
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
     this.day = this.day + 1;
     this.brewName = this.stats_G[0].brew_name;
@@ -235,7 +239,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             },
             ticks: {
               fontSize: 14,
-              max: this.units ? 80 : 27,
+              max: this.units ? 90 : 27,
               min: this.units ? 40 : 4,
               stepSize: this.units ? 3 : 2
             }
