@@ -40,7 +40,7 @@
       </div>
       <div class="row">
         <div class="dropdown col-md-3 col-md-offset-10 col-sm-12 filter-readings">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span style="font-size: 16px;">Filter Readings</span>
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
             <li><a (click)='filterReadings(20)'>20</a></li>

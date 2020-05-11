@@ -28,6 +28,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public stats_G: Array<BrewStatsObj>;
   public lineChart: any;
   public enoughData: boolean;
+  public num_of_results_to_show = 20;
 
   constructor(private brewService: BrewService) { }
 
@@ -36,15 +37,15 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.loadingStats = true;
     this.statsAvailable = false;
     this.enoughData = false;
-    this.filterReadings(20);
+    this.filterReadings(this.num_of_results_to_show);
   }
 
   ngAfterViewInit() {
     // something
   }
 
-  public filterReadings(num_of_results_to_show: number) {
-
+  public filterReadings(num: number) {
+    this.num_of_results_to_show = num;
     this.brewService.getBrewStats().subscribe((stats) => {
       // Are there any results?
       if (stats.length > 0) {
@@ -64,7 +65,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
         // If the number of total readings is less than the number the
         // user wants to show.
-        if (num_of_readings < num_of_results_to_show) {
+        if (num_of_readings < this.num_of_results_to_show) {
           if (this.lineChart !== undefined) {
             this.lineChart.destroy();
           }
@@ -76,7 +77,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
         // Starts to build out what is going to be shown to the user.
         const returnResults = [];
 
-        if (num_of_results_to_show === -1) {
+        if (this.num_of_results_to_show === -1) {
+          this.num_of_results_to_show = this.stats_G.length;
           if (this.lineChart !== undefined) {
             this.lineChart.destroy();
           }
@@ -87,7 +89,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
         }
 
         // Creates the "skip" or hop between readings. The more readinds the greater the skip.
-        const mod = Math.floor(num_of_readings / num_of_results_to_show) + 1;
+        const mod = Math.floor(num_of_readings / this.num_of_results_to_show) + 1;
 
         // Add the first reading to the start of the results
         returnResults.push(this.stats_G[0]);
@@ -110,7 +112,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
         this.buildChart();
         this.getMoreStats();
         console.log('Number of TOTAL readings: ' + num_of_readings);
-        console.log('Number of results User wants to see: ' + num_of_results_to_show);
+        console.log('Number of results User wants to see: ' + this.num_of_results_to_show);
         console.log('Number of results currently being SHOWN: ' + returnResults.length);
 
       } else {
