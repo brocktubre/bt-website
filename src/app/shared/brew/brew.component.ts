@@ -46,8 +46,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public filterReadings(num_of_results_to_show: number) {
 
     this.brewService.getBrewStats().subscribe((stats) => {
+      // Are there any results?
       if (stats.length > 0) {
-
         this.stats_G = stats;
         this.units = true;
         this.statsAvailable = true;
@@ -56,13 +56,14 @@ export class BrewComponent implements OnInit, AfterViewInit {
         const num_of_readings = this.stats_G.length;
         console.log('There are brew stats in the Google sheet. Number of readings: ' + num_of_readings);
 
-        // not enough data collected
-        if (num_of_readings < 5) {
+        // Not enough data collected. Show alert warning.
+        if (num_of_readings <= 5) {
           return;
         }
-
         this.enoughData = true;
 
+        // If the number of total readings is less than the number the
+        // user wants to show.
         if (num_of_readings < num_of_results_to_show) {
           if (this.lineChart !== undefined) {
             this.lineChart.destroy();
@@ -71,24 +72,16 @@ export class BrewComponent implements OnInit, AfterViewInit {
           this.getMoreStats();
           return;
         }
-        // The number of results is greater than 20
+        // Starts to build out what is going to be shown to the user.
         const returnResults = [];
+
+        // Creates the "skip" or hop between readings. The more readinds the greater the skip.
         const mod = Math.floor(num_of_readings / num_of_results_to_show) + 1;
 
         // Add the first reading to the start of the results
         returnResults.push(this.stats_G[0]);
 
-        // if there is only 1 result
-        if (num_of_readings === 1) {
-          if (this.lineChart !== undefined) {
-            this.lineChart.destroy();
-          }
-          this.buildChart();
-          this.getMoreStats();
-          return;
-        }
-
-        // Filters the results to less than 20 showing
+        // Filters the results by the mod number.
         for (let i = 1; i < num_of_readings; i++) {
           if (i % mod === 0) {
             returnResults.push(this.stats_G[i]);
@@ -98,6 +91,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
         // Add the last latest value
         returnResults.push(this.stats_G[num_of_readings - 1]);
         this.stats_G = returnResults;
+
+        // Builds out the chart.
         if (this.lineChart !== undefined) {
           this.lineChart.destroy();
         }
