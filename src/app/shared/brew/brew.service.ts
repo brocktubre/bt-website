@@ -30,7 +30,7 @@ export class BrewService {
               const date = moment(reading.gsx$timestamp.$t).add('3', 'hours').format('MM/DD/YY hh:mm A');
               stat.date = date;
               stat.gravity = reading.gsx$sg.$t;
-              stat.temperature = reading.gsx$temp.$t;
+              stat.temperature = parseFloat(reading.gsx$temp.$t).toFixed(1);
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
