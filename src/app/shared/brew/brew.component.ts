@@ -131,10 +131,16 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.currABV = ((this.originalGravity  - this.latestGravity ) * 131.25).toFixed(2).toString() + '%';
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
     this.brewName = this.stats_G[0].brew_name;
-    const date = moment.utc(this.stats_G[0].date);
-    date.add(1, 'month'); // date operations follow date-math logic
-    const s = date.format('MM/DD/YY');
-    this.brewDate = s;
+    // All of this is depreicated for moment. Getting the following warning:
+    // Deprecation warning: value provided is not in a recognized RFC2822 or ISO format.
+    // moment construction falls back to js Date(),
+    // const date = moment.utc(this.stats_G[0].date);
+    // date.add(1, 'month'); // date operations follow date-math logic
+    // const s = date.format('MM/DD/YY');
+    // this.brewDate = s;
+    const date = moment.utc(new Date(this.stats_G[0].date)).format('MM/DD/YY');
+    // date.add(1, 'month'); // date operations follow date-math logic
+    this.brewDate = date;
   }
 
   public onTempUnitChange($event) {
