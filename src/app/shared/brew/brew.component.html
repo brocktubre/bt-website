@@ -14,7 +14,10 @@
     <div *ngIf="!statsAvailable && !loadingStats"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
       <p> <strong>There are currrently no brew stats avalible.</strong></p>
     </div>
-    <div *ngIf="!loadingStats && statsAvailable">
+    <div *ngIf="!loadingStats && statsAvailable && !enoughData"  class="container text-center alert alert-warning" style="margin-bottom: 400px;">
+      <p> <strong>There is currrently not enough data collected to produce a viable graph. Check back later.</strong></p>
+    </div>
+    <div *ngIf="!loadingStats && statsAvailable && enoughData">
       <div class="row text-center" style="padding-bottom: 10px;">
         <h2> <strong>{{ brewName }}</strong></h2>
         <h4><strong>Brew Date: {{ brewDate }}</strong></h4>
@@ -35,12 +38,22 @@
           <h4>Current ABV: <strong>{{ currABV }}</strong></h4>
         </div>
       </div>
+      <div class="row">
+        <div class="dropdown col-md-3 col-md-offset-10 col-sm-12 filter-readings">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span style="font-size: 16px;">Filter Readings</span>
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a (click)='filterReadings(20)'>20</a></li>
+            <li><a (click)='filterReadings(50)'>50</a></li>
+            <li><a (click)='filterReadings(100)'>100</a></li>
+            <li><a (click)='filterReadings(200)'>200</a></li>
+            <li><a (click)='filterReadings(500)'>500</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="row">
       <canvas id="lineChart" height="150" ></canvas>
-    </div>
-    <div class="row">
-      <!-- <canvas id="myChart" height="150" ></canvas> -->
     </div>
   </div>
 

@@ -146,3 +146,7 @@ ul.timeline > li:before {
   height: 20px;
   z-index: 400;
 }
+
+.filter-readings a:hover {
+  cursor: pointer;
+}

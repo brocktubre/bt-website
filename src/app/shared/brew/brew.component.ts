@@ -27,6 +27,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public units: boolean;
   public stats_G: Array<BrewStatsObj>;
   public lineChart: any;
+  public enoughData: boolean;
 
   constructor(private brewService: BrewService) { }
 
@@ -34,25 +35,83 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.year = new Date().getFullYear();
     this.loadingStats = true;
     this.statsAvailable = false;
+    this.enoughData = false;
+    this.filterReadings(20);
+  }
+
+  ngAfterViewInit() {
+    // something
+  }
+
+  public filterReadings(num_of_results_to_show: number) {
+
     this.brewService.getBrewStats().subscribe((stats) => {
       if (stats.length > 0) {
-        console.log('There are brew stats in the Google sheet.');
+
         this.stats_G = stats;
         this.units = true;
         this.statsAvailable = true;
         this.loadingStats = false;
+
+        const num_of_readings = this.stats_G.length;
+        console.log('There are brew stats in the Google sheet. Number of readings: ' + num_of_readings);
+
+        // not enough data collected
+        if (num_of_readings < 5) {
+          return;
+        }
+
+        this.enoughData = true;
+
+        if (num_of_readings < num_of_results_to_show) {
+          if (this.lineChart !== undefined) {
+            this.lineChart.destroy();
+          }
+          this.buildChart();
+          this.getMoreStats();
+          return;
+        }
+        // The number of results is greater than 20
+        const returnResults = [];
+        const mod = Math.floor(num_of_readings / num_of_results_to_show) + 1;
+
+        // Add the first reading to the start of the results
+        returnResults.push(this.stats_G[0]);
+
+        // if there is only 1 result
+        if (num_of_readings === 1) {
+          if (this.lineChart !== undefined) {
+            this.lineChart.destroy();
+          }
+          this.buildChart();
+          this.getMoreStats();
+          return;
+        }
+
+        // Filters the results to less than 20 showing
+        for (let i = 1; i < num_of_readings; i++) {
+          if (i % mod === 0) {
+            returnResults.push(this.stats_G[i]);
+          }
+        }
+
+        // Add the last latest value
+        returnResults.push(this.stats_G[num_of_readings - 1]);
+        this.stats_G = returnResults;
+        if (this.lineChart !== undefined) {
+          this.lineChart.destroy();
+        }
         this.buildChart();
         this.getMoreStats();
+        console.log('Number of TOTAL readings: ' + num_of_readings);
+        console.log('Number of results User wants to see: ' + num_of_results_to_show);
+        console.log('Number of results currently being SHOWN: ' + returnResults.length);
+
       } else {
         console.log('No brew stats in the Google sheet.');
       }
       this.loadingStats = false;
     });
-
-  }
-
-  ngAfterViewInit() {
-    // something
   }
 
   public getMoreStats() {
@@ -117,7 +176,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
               borderWidth: 5,
               pointBorderWidth: 2,
               pointBackgroundColor: 'rgba(134, 179, 218, 1)',
-              borderColor: 'rgba(44, 98, 144, 1)',
+              borderColor: '#2780e3',
               order: 1,
               yAxisID: 'temp'
 
@@ -131,7 +190,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
             borderWidth: 5,
             pointBorderWidth: 2,
             pointBackgroundColor: 'rgba(177, 224, 154, 1)',
-            borderColor: 'rgba(67, 125, 38, 1)',
+            borderColor: '#3fb618',
             order: 2,
             yAxisID: 'gravity'
           }
@@ -203,7 +262,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
           }],
         },
         events: ['click', 'mousemove']
-      } 
+      }
     });
   }
 
