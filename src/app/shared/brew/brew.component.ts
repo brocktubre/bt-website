@@ -140,9 +140,11 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.currABV = ((this.originalGravity  - this.stats_G[this.stats_G.length - 1].gravity) * 131.25).toFixed(2).toString() + '%';
 
     // AA = (OG – FG)/OG
-    const og_whole = ((this.originalGravity - 1) * 1000);
-    const latest_whole = ((parseFloat(this.latestGravity) - 1) * 1000);
-    this.apparent_attenuation = ((og_whole - latest_whole) / this.originalGravity).toFixed(2).toString() + '%';
+    // const og_whole = ((this.originalGravity - 1) * 1000);
+    // const latest_whole = ((parseFloat(this.latestGravity) - 1) * 1000);
+    // this.apparent_attenuation = ((og_whole - latest_whole) / this.originalGravity).toFixed(2).toString() + '%';
+    // tslint:disable-next-line:max-line-length
+    this.apparent_attenuation = (((this.originalGravity - parseFloat(this.latestGravity)) / (this.originalGravity - 1)) * 100).toFixed(2).toString() + '%';
 
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
     this.day = this.day + 1;
