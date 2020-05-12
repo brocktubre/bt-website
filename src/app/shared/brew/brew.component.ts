@@ -209,7 +209,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
               pointBackgroundColor: 'rgba(134, 179, 218, 1)',
               borderColor: '#2780e3',
               order: 1,
-              yAxisID: 'temp'
+              yAxisID: 'temp',
+              lineTension: 0
 
           },
           {
@@ -223,7 +224,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
             pointBackgroundColor: 'rgba(177, 224, 154, 1)',
             borderColor: '#3fb618',
             order: 2,
-            yAxisID: 'gravity'
+            yAxisID: 'gravity',
+            lineTension: 0
           }
         ]
       },
