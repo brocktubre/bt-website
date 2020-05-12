@@ -107,8 +107,11 @@ export class BrewComponent implements OnInit, AfterViewInit {
           }
         }
 
-        // Add the last latest value
-        returnResults.push(this.stats_G[this.num_of_readings - 1]);
+        if (this.stats_G[this.num_of_readings - 1].reading_id !== returnResults[returnResults.length - 1].reading_id) {
+          // Add the last latest value
+          returnResults.push(this.stats_G[this.num_of_readings - 1]);
+        }
+
         this.stats_G = returnResults;
 
         // Builds out the chart.

@@ -33,11 +33,11 @@
         <div class="col-md-4 col-sm-12">
           <h4>Current Temperature: <strong>{{ latestTemp }}</strong></h4>
           <h4>Current Gravity: <strong>{{ latestGravity }}</strong></h4>
-          <h4>Apparent Attenuation: <strong>{{ apparent_attenuation }}</strong></h4>
         </div>
         <div class="col-md-4 col-sm-12">
           <h4>Original Gravity: <strong>{{ originalGravity }}</strong></h4>
           <h4>Current ABV: <strong>{{ currABV }}</strong></h4>
+          <h4>Apparent Attenuation: <strong>{{ apparent_attenuation }}</strong></h4>
         </div>
       </div>
       <div class="row">
@@ -45,11 +45,11 @@
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><a (click)='filterReadings(20)'>20</a></li>
-            <li><a (click)='filterReadings(50)'>50</a></li>
-            <li><a (click)='filterReadings(100)'>100</a></li>
-            <li><a (click)='filterReadings(200)'>200</a></li>
-            <li><a (click)='filterReadings(500)'>500</a></li>
+            <li *ngIf='num_of_readings >= 20'><a (click)='filterReadings(20)'>20</a></li>
+            <li *ngIf='num_of_readings >= 50'><a (click)='filterReadings(50)'>50</a></li>
+            <li *ngIf='num_of_readings >= 100'><a (click)='filterReadings(100)'>100</a></li>
+            <li *ngIf='num_of_readings >= 200'><a (click)='filterReadings(200)'>200</a></li>
+            <li *ngIf='num_of_readings >= 500'><a (click)='filterReadings(500)'>500</a></li>
             <li><a (click)='filterReadings(-1)'>All</a></li>
           </ul>
         </div>
