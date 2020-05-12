@@ -22,8 +22,11 @@ export class BrewService {
     const getUrl = environment.brewStats.jsonUrl;
     const getWorkingURL = this.http.get(getUrl, httpOptions);
     getWorkingURL.subscribe((url: any) => {
-      let workingURL = url.feed.entry[0].gsx$url.$t;
+      if (url.feed.entry === undefined) {
+        sendResult.error('There was an error getting the URL for the brew stats.');
+      }
 
+      let workingURL = url.feed.entry[0].gsx$url.$t;
       if (environment.production) {
         workingURL = url.feed.entry[1].gsx$url.$t;
       }
@@ -42,6 +45,8 @@ export class BrewService {
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
+          } else {
+            sendResult.error('There was an error getting brew stats.');
           }
           sendResult.next(brewStats);
       });
