@@ -20,22 +20,31 @@ export class BrewService {
       headers: headers
     };
     const getUrl = environment.brewStats.jsonUrl;
-    const getAllBrewStats = this.http.get(getUrl, httpOptions);
-    getAllBrewStats.subscribe((results: any) => {
-        const brewStats = new Array<BrewStatsObj>();
-        if (results.feed.entry !== undefined) {
-          results.feed.entry.forEach(reading => {
-            const stat = new BrewStatsObj();
-            stat.reading_id = reading.id.$t;
-            const date = moment(reading.gsx$timestamp.$t).add('3', 'hours').format('MM/DD/YY hh:mm A');
-            stat.date = date;
-            stat.gravity = reading.gsx$sg.$t;
-            stat.temperature = reading.gsx$temp.$t;
-            brewStats.push(stat);
-            brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
-          });
-        }
-        sendResult.next(brewStats);
+    const getWorkingURL = this.http.get(getUrl, httpOptions);
+    getWorkingURL.subscribe((url: any) => {
+      let workingURL = url.feed.entry[0].gsx$url.$t;
+
+      if (environment.production) {
+        workingURL = url.feed.entry[1].gsx$url.$t;
+      }
+
+      const getAllBrewStats = this.http.get(workingURL, httpOptions);
+      getAllBrewStats.subscribe((results: any) => {
+          const brewStats = new Array<BrewStatsObj>();
+          if (results.feed.entry !== undefined) {
+            results.feed.entry.forEach(reading => {
+              const stat = new BrewStatsObj();
+              stat.reading_id = reading.id.$t;
+              const date = moment(reading.gsx$timestamp.$t).add('3', 'hours').format('MM/DD/YY hh:mm A');
+              stat.date = date;
+              stat.gravity = reading.gsx$sg.$t;
+              stat.temperature = reading.gsx$temp.$t;
+              brewStats.push(stat);
+              brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
+            });
+          }
+          sendResult.next(brewStats);
+      });
     });
     return sendResult.asObservable();
   }
