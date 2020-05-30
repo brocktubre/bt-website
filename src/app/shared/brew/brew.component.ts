@@ -1,9 +1,10 @@
 import { BrewService } from './brew.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import * as Chart from 'chart.js';
 import { BrewStatsObj } from '../models/brew-stats-object.model';
 import * as moment from 'moment';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-brew',
@@ -32,18 +33,31 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public num_of_readings: number;
   public apparent_attenuation: string;
 
-  constructor(private brewService: BrewService) { }
+  @ViewChild('brewID') brewID: ElementRef;
+
+  constructor(private brewService: BrewService, private activeRoute: ActivatedRoute,) { }
 
   ngOnInit() {
     this.year = new Date().getFullYear();
     this.loadingStats = true;
     this.statsAvailable = false;
     this.enoughData = false;
-    this.filterReadings(this.num_of_results_to_show);
-    // refresh every 15 minutes.
-    setInterval(() => {
+
+    const brewId = this.activeRoute.snapshot.params['id'];
+
+    if (brewId === undefined) {
       this.filterReadings(this.num_of_results_to_show);
-    }, 90000);
+      // refresh every 15 minutes.
+      setInterval(() => {
+        this.filterReadings(this.num_of_results_to_show);
+        }, 90000);
+    } else {
+      this.filterPreviousReadings(this.num_of_results_to_show, brewId);
+      // refresh every 15 minutes.
+      setInterval(() => {
+        this.filterPreviousReadings(this.num_of_results_to_show, brewId);
+        }, 90000);
+    }
   }
 
   ngAfterViewInit() {
@@ -53,6 +67,87 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public filterReadings(num: number) {
     this.num_of_results_to_show = num;
     this.brewService.getBrewStats().subscribe((stats) => {
+      // Are there any results?
+      if (stats.length > 0) {
+        this.stats_G = stats;
+        this.units = true;
+        this.statsAvailable = true;
+        this.loadingStats = false;
+
+        this.num_of_readings = this.stats_G.length;
+        console.log('There are brew stats in the Google sheet. Number of readings: ' + this.num_of_readings);
+
+        // Not enough data collected. Show alert warning.
+        if (this.num_of_readings <= 2) {
+          return;
+        }
+        this.enoughData = true;
+
+        // If the number of total readings is less than the number the
+        // user wants to show.
+        if (this.num_of_readings < this.num_of_results_to_show) {
+          if (this.lineChart !== undefined) {
+            this.lineChart.destroy();
+          }
+          this.buildChart();
+          this.getMoreStats();
+          return;
+        }
+
+        // Starts to build out what is going to be shown to the user.
+        const returnResults = [];
+
+        if (this.num_of_results_to_show === -1) {
+          this.num_of_results_to_show = this.stats_G.length;
+          if (this.lineChart !== undefined) {
+            this.lineChart.destroy();
+          }
+          this.buildChart();
+          this.getMoreStats();
+          console.log('User wants to see ALL results: ' + this.stats_G.length);
+          return;
+        }
+
+        // Creates the "skip" or hop between readings. The more readinds the greater the skip.
+        const mod = Math.floor(this.num_of_readings / this.num_of_results_to_show) + 1;
+
+        // Add the first reading to the start of the results
+        returnResults.push(this.stats_G[0]);
+
+        // Filters the results by the mod number.
+        for (let i = 1; i < this.num_of_readings; i++) {
+          if (i % mod === 0) {
+            returnResults.push(this.stats_G[i]);
+          }
+        }
+
+        if (this.stats_G[this.num_of_readings - 1].reading_id !== returnResults[returnResults.length - 1].reading_id) {
+          // Add the last latest value
+          returnResults.push(this.stats_G[this.num_of_readings - 1]);
+        }
+
+        this.stats_G = returnResults;
+
+        // Builds out the chart.
+        if (this.lineChart !== undefined) {
+          this.lineChart.destroy();
+        }
+        this.buildChart();
+        this.getMoreStats();
+        console.log('Number of TOTAL readings: ' + this.num_of_readings);
+        console.log('Number of results User wants to see: ' + this.num_of_results_to_show);
+        console.log('Number of results currently being SHOWN: ' + returnResults.length);
+
+      } else {
+        console.log('No brew stats in the Google sheet.');
+      }
+      this.loadingStats = false;
+    });
+  }
+
+  public filterPreviousReadings(num: number, brewId: number) {
+    this.num_of_results_to_show = num;
+    this.brewService.getPreviousBrewStats(brewId).subscribe((stats) => {
       // Are there any results?
       if (stats.length > 0) {
         this.stats_G = stats;

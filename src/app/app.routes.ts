@@ -32,6 +32,7 @@ export const routes: Routes = [
     { path: 'cuhackit2019', component: CUHackitComponent },
     { path: 'cuhackit', component: Cuhackit2020Component },
     { path: 'cuhackit2020', component: Cuhackit2020Component },
+    { path: 'brew/:id', component: BrewComponent },
     { path: 'brew', component: BrewComponent },
     { path: '**', redirectTo: '' }
 ];
