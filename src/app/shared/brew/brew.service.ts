@@ -30,7 +30,7 @@ export class BrewService {
       if (environment.production) {
         workingURL = url.feed.entry[1].gsx$url.$t;
       }
-      debugger;
+
       const getAllBrewStats = this.http.get(workingURL, httpOptions);
       getAllBrewStats.subscribe((results: any) => {
           const brewStats = new Array<BrewStatsObj>();
@@ -49,7 +49,11 @@ export class BrewService {
             sendResult.error('There was an error getting brew stats.');
           }
           sendResult.next(brewStats);
+      }, (error) => {
+        sendResult.error('There was an getting the current brew\'s stats.');
       });
+    }, (error) => {
+      sendResult.error('There was an retrieveing working URL.');
     });
     return sendResult.asObservable();
   }
@@ -68,7 +72,11 @@ export class BrewService {
         sendResult.error('There was an error getting the URL for the brew stats.');
       }
 
-      const workingURL = url.feed.entry[id - 2].gsx$brew.$t;
+      const cellNumber = (id - 2);
+      if (cellNumber > url.feed.entry.length || id <= 0) {
+        sendResult.error('Brew id of ' +  id + ' does not exist.');
+      }
+      const workingURL = url.feed.entry[cellNumber].gsx$brewurl.$t;
 
       const getAllBrewStats = this.http.get(workingURL, httpOptions);
       getAllBrewStats.subscribe((results: any) => {
@@ -88,7 +96,11 @@ export class BrewService {
             sendResult.error('There was an error getting brew stats.');
           }
           sendResult.next(brewStats);
-      });
+        }, (error) => {
+          sendResult.error('There was an getting a previous brew\'s stats.');
+        });
+    }, (error) => {
+        sendResult.error('There was an retrieveing working URL.');
     });
     return sendResult.asObservable();
   }

@@ -11,13 +11,16 @@
     <div *ngIf="loadingStats"  class="container text-center" style="min-height: 700px;">
       <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
     </div>
-    <div *ngIf="!statsAvailable && !loadingStats && !enoughData"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
+    <!-- <div *ngIf="!statsAvailable && !loadingStats && !enoughData"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
       <p> <strong>There are currrently no brew stats avalible.</strong></p>
     </div>
     <div *ngIf="!loadingStats && statsAvailable && !enoughData"  class="container text-center alert alert-warning" style="margin-bottom: 400px;">
       <p> <strong>There is currrently not enough data collected to produce a viable graph. Check back later.</strong></p>
+    </div> -->
+    <div *ngIf="!loadingStats && isError"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
+      <p> <strong>{{ errorMessage }}</strong></p>
     </div>
-    <div *ngIf="!loadingStats && statsAvailable && enoughData">
+    <div *ngIf="!loadingStats && !isError">
       <div class="row text-center" style="padding-bottom: 10px;">
         <h2> <strong>{{ brewName }}</strong></h2>
         <h4><strong>Brew Date: {{ brewDate }}</strong></h4>

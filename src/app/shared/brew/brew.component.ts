@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BrewComponent implements OnInit, AfterViewInit {
   public year: number;
-  public statsAvailable: boolean;
+  // public statsAvailable: boolean;
   public loadingStats: boolean;
   public canvas: any;
   public ctx: any;
@@ -28,10 +28,12 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public units: boolean;
   public stats_G: Array<BrewStatsObj>;
   public lineChart: any;
-  public enoughData: boolean;
+  // public enoughData: boolean;
   public num_of_results_to_show = 20;
   public num_of_readings: number;
   public apparent_attenuation: string;
+  public isError = false;
+  public errorMessage: string;
 
   @ViewChild('brewID') brewID: ElementRef;
 
@@ -40,8 +42,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.year = new Date().getFullYear();
     this.loadingStats = true;
-    this.statsAvailable = false;
-    this.enoughData = false;
+    // this.statsAvailable = false;
+    // this.enoughData = false;
 
     const brewId = this.activeRoute.snapshot.params['id'];
 
@@ -71,7 +73,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
       if (stats.length > 0) {
         this.stats_G = stats;
         this.units = true;
-        this.statsAvailable = true;
+        // this.statsAvailable = true;
         this.loadingStats = false;
 
         this.num_of_readings = this.stats_G.length;
@@ -79,9 +81,10 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
         // Not enough data collected. Show alert warning.
         if (this.num_of_readings <= 2) {
+          this.isError = true;
+          this.errorMessage = 'There is currrently not enough data collected to produce a viable graph. Check back later.';
           return;
         }
-        this.enoughData = true;
 
         // If the number of total readings is less than the number the
         // user wants to show.
@@ -139,9 +142,15 @@ export class BrewComponent implements OnInit, AfterViewInit {
         console.log('Number of results currently being SHOWN: ' + returnResults.length);
 
       } else {
-        console.log('No brew stats in the Google sheet.');
+        this.isError = true;
+        this.errorMessage = 'No brew stats in the Google sheet.';
       }
       this.loadingStats = false;
+    }, (error) => {
+      this.isError = true;
+      // this.statsAvailable = false;
+      this.loadingStats = false;
+      this.errorMessage = error;
     });
   }
 
@@ -152,7 +161,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
       if (stats.length > 0) {
         this.stats_G = stats;
         this.units = true;
-        this.statsAvailable = true;
+        // this.statsAvailable = true;
         this.loadingStats = false;
 
         this.num_of_readings = this.stats_G.length;
@@ -160,9 +169,10 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
         // Not enough data collected. Show alert warning.
         if (this.num_of_readings <= 2) {
+          this.isError = true;
+          this.errorMessage = 'There is currrently not enough data collected to produce a viable graph. Check back later.';
           return;
         }
-        this.enoughData = true;
 
         // If the number of total readings is less than the number the
         // user wants to show.
@@ -220,9 +230,17 @@ export class BrewComponent implements OnInit, AfterViewInit {
         console.log('Number of results currently being SHOWN: ' + returnResults.length);
 
       } else {
-        console.log('No brew stats in the Google sheet.');
+        this.isError = true;
+        // this.statsAvailable = false;
+        this.loadingStats = false;
+        this.errorMessage = 'No brew stats in the Google sheet.';
       }
       this.loadingStats = false;
+    }, (error) => {
+      this.isError = true;
+      // this.statsAvailable = false;
+      this.loadingStats = false;
+      this.errorMessage = error;
     });
   }
 
