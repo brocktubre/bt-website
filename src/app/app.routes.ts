@@ -1,3 +1,4 @@
+import { PreviousBrewsComponent } from './shared/brew/previous-brews/previous-brews.component';
 import { BrewComponent } from './shared/brew/brew.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
@@ -32,6 +33,7 @@ export const routes: Routes = [
     { path: 'cuhackit2019', component: CUHackitComponent },
     { path: 'cuhackit', component: Cuhackit2020Component },
     { path: 'cuhackit2020', component: Cuhackit2020Component },
+    { path: 'brew/all', component: PreviousBrewsComponent},
     { path: 'brew/:id', component: BrewComponent },
     { path: 'brew', component: BrewComponent },
     { path: '**', redirectTo: '' }

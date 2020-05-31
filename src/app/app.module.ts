@@ -36,6 +36,7 @@ import { Cuhackit2020Component } from './shared/cuhackit2020/cuhackit2020.compon
 import { PublicationsComponent } from './publications/publications.component';
 import { BrewComponent } from './shared/brew/brew.component';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import { PreviousBrewsComponent } from './shared/brew/previous-brews/previous-brews.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
     CUHackitComponent,
     Cuhackit2020Component,
     PublicationsComponent,
-    BrewComponent
+    BrewComponent,
+    PreviousBrewsComponent
 
   ],
   imports: [

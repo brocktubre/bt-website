@@ -150,3 +150,8 @@ ul.timeline > li:before {
 .filter-readings a:hover {
   cursor: pointer;
 }
+
+.brew-heading {
+  font-size: 32px;
+  font-weight: 300;
+}
