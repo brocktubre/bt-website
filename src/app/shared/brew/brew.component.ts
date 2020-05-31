@@ -67,6 +67,12 @@ export class BrewComponent implements OnInit, AfterViewInit {
   }
 
   public filterReadings(num: number) {
+    const brewId = this.activeRoute.snapshot.params['id'];
+    if (brewId !== undefined) {
+      this.filterPreviousReadings(num, brewId);
+      return;
+    }
+
     this.num_of_results_to_show = num;
     this.brewService.getBrewStats().subscribe((stats) => {
       // Are there any results?
