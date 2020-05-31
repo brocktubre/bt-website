@@ -1,4 +1,5 @@
 export class BrewStatsObj {
+  public id: number;
   public reading_id: number;
   public date: string;
   public temperature: number;

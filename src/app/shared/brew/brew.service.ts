@@ -84,6 +84,7 @@ export class BrewService {
           if (results.feed.entry !== undefined) {
             results.feed.entry.forEach(reading => {
               const stat = new BrewStatsObj();
+              stat.id = cellNumber;
               stat.reading_id = reading.id.$t;
               const date = moment(reading.gsx$timestamp.$t).add('3', 'hours').format('MM/DD/YY hh:mm A');
               stat.date = date;
@@ -99,6 +100,41 @@ export class BrewService {
         }, (error) => {
           sendResult.error('There was an getting a previous brew\'s stats.');
         });
+    }, (error) => {
+        sendResult.error('There was an retrieveing working URL.');
+    });
+    return sendResult.asObservable();
+  }
+
+  public getPreviousBrewsTable(): Observable<Array<BrewStatsObj>> {
+    const sendResult = new Subject<Array<BrewStatsObj>>();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json;');
+    const httpOptions = {
+      headers: headers
+    };
+    const getUrl = environment.brewStats.jsonUrlPreviousBrews;
+    const getWorkingURL = this.http.get(getUrl, httpOptions);
+    getWorkingURL.subscribe((results: any) => {
+      if (results.feed.entry === undefined) {
+        sendResult.error('There was an error getting the URL for the brew stats.');
+      }
+
+      const previousBrewsList = new Array<BrewStatsObj>();
+      let brewId = 2;
+      if (results.feed.entry !== undefined) {
+        results.feed.entry.forEach((previousBrews) => {
+          const prevBrew = new BrewStatsObj();
+          prevBrew.id = brewId;
+          prevBrew.brew_name = previousBrews.gsx$brewname.$t;
+          prevBrew.date = previousBrews.gsx$brewdate.$t;
+          brewId++;
+          previousBrewsList.push(prevBrew);
+        });
+        sendResult.next(previousBrewsList);
+      } else {
+        sendResult.error('There was an retrieveing previous brews list.');
+      }
     }, (error) => {
         sendResult.error('There was an retrieveing working URL.');
     });

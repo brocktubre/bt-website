@@ -155,3 +155,7 @@ ul.timeline > li:before {
   font-size: 32px;
   font-weight: 300;
 }
+
+.prev-brew {
+  cursor: pointer;
+}
