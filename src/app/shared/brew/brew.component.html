@@ -31,7 +31,7 @@
         <div class="col-md-5 col-sm-12">
           <h2> <strong>{{ brewName }}</strong></h2>
           <h4>Brew Date: <strong>{{ brewDate }}</strong></h4>
-          <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'"></ui-switch></span></h4>
+          <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'" style="padding-left: 15px;"></ui-switch></span></h4>
           <h4>Latest Reading: <strong>{{ latestReading }}</strong></h4>
           <h4>Fermentation Day: <strong>{{ day }}</strong></h4>
           <h4>Total Readings: <strong>{{ num_of_readings }}</strong></h4>
