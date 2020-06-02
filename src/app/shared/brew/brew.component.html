@@ -22,6 +22,9 @@
       <p> <strong>{{ errorMessage }}</strong></p>
     </div>
     <div *ngIf="!loadingStats && !isError">
+      <div class="row text-center" style="padding-top: 50px;">
+        <img [src]="embedded" class="rounded">
+      </div>
       <div class="row text-center" style="padding-bottom: 10px;">
         <h2> <strong>{{ brewName }}</strong></h2>
         <h4><strong>Brew Date: {{ brewDate }}</strong></h4>
@@ -61,32 +64,18 @@
           <span class="" style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
           <br>
           <div class="btn-group">
-            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-default':'btn btn-primary'">20</button>
-            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-default':'btn btn-primary'">50</button>
-            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-default':'btn btn-primary'">100</button>
-            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-default':'btn btn-primary'">200</button>
-            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-default':'btn btn-primary'">500</button>
-            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-default':'btn btn-primary'">All</button>
+            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default':'btn btn-space btn-primary'">20</button>
+            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default':'btn btn-space btn-primary'">50</button>
+            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default':'btn btn-space btn-primary'">100</button>
+            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default':'btn btn-space btn-primary'">200</button>
+            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default':'btn btn-space btn-primary'">500</button>
+            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default':'btn btn-space btn-primary'">All</button>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
       <canvas id="lineChart" height="150" ></canvas>
-    </div>
-    <div class="row" style="padding-top: 50px;">
-      <!-- <div class="col-md-6 col-sm-12" style="padding-top: 25px;">
-        <img src="https://via.placeholder.com/500" class="img-responsive"/>
-      </div>
-      <div class="col-md-6 col-sm-12" style="padding-top: 25px;">
-        <img src="https://via.placeholder.com/500" class="img-responsive"/>
-      </div>
-      <div class="col-md-6 col-sm-12" style="padding-top: 25px;">
-        <img src="https://via.placeholder.com/500" class="img-responsive"/>
-      </div>
-      <div class="col-md-6 col-sm-12" style="padding-top: 25px;">
-        <img src="https://via.placeholder.com/500" class="img-responsive"/>
-      </div> -->
     </div>
   </div>
 

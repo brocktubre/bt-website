@@ -159,3 +159,36 @@ ul.timeline > li:before {
 .prev-brew {
   cursor: pointer;
 }
+
+.thumb-img{
+  object-fit: cover;
+  overflow: hidden;
+  height: 30vw;
+  width : 30vw;
+}
+
+.btn-space {
+  margin-right: 2px;
+}
+
+.image-cropper {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.img-circle {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+img.rounded {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+}

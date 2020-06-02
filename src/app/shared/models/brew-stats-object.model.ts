@@ -6,4 +6,5 @@ export class BrewStatsObj {
   public gravity: number;
   public brew_name: string;
   public photos_url: string;
+  public embedded: string;
 }

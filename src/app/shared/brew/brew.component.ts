@@ -5,6 +5,7 @@ import { BrewStatsObj } from '../models/brew-stats-object.model';
 import * as moment from 'moment';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { ActivatedRoute } from '@angular/router';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-brew',
@@ -35,10 +36,11 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public isError = false;
   public errorMessage: string;
   public photosUrl: string;
+  public embedded: string;
 
   @ViewChild('brewID') brewID: ElementRef;
 
-  constructor(private brewService: BrewService, private activeRoute: ActivatedRoute,) { }
+  constructor(private brewService: BrewService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.year = new Date().getFullYear();
@@ -272,6 +274,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     // date.add(1, 'month'); // date operations follow date-math logic
     this.brewDate = date;
     this.photosUrl = this.stats_G[0].photos_url;
+    this.embedded = this.stats_G[0].embedded;
   }
 
   public onTempUnitChange($event) {

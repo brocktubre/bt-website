@@ -43,6 +43,7 @@ export class BrewService {
               stat.gravity = reading.gsx$sg.$t;
               stat.temperature = reading.gsx$temp.$t;
               stat.photos_url = url.feed.entry[url.feed.entry.length - 1].gsx$photosurl.$t;
+              stat.embedded = url.feed.entry[url.feed.entry.length - 1].gsx$embedded.$t;
               // stat.brew_name = previousBrews.gsx$brewname.$t;
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
@@ -93,6 +94,7 @@ export class BrewService {
               stat.gravity = reading.gsx$sg.$t;
               stat.temperature = reading.gsx$temp.$t;
               stat.photos_url = url.feed.entry[cellNumber].gsx$photosurl.$t;
+              stat.embedded = url.feed.entry[cellNumber].gsx$embedded.$t;
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
@@ -132,6 +134,7 @@ export class BrewService {
           prevBrew.brew_name = previousBrews.gsx$brewname.$t;
           prevBrew.date = previousBrews.gsx$brewdate.$t;
           prevBrew.photos_url = previousBrews.gsx$photosurl.$t;
+          prevBrew.embedded = previousBrews.gsx$embedded.$t;
           brewId++;
           previousBrewsList.push(prevBrew);
         });
