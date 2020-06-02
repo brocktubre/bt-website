@@ -59,16 +59,16 @@
             <li><a (click)='filterReadings(-1)'>All</a></li>
           </ul>
         </div> -->
-        <div class="col-md-6 col-sm-12 col-md-offset-3">
+        <div class="col-md-6 col-sm-12 col-md-offset-3 col-xs-12">
           <h3>Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</h3>
           <br>
           <div class="btn-group">
-            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">20</button>
-            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">50</button>
-            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">100</button>
-            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">200</button>
-            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">500</button>
-            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">All</button>
+            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default':'btn btn-space btn-primary'">20</button>
+            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default':'btn btn-space btn-primary'">50</button>
+            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default':'btn btn-space btn-primary'">100</button>
+            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default':'btn btn-space btn-primary'">200</button>
+            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default':'btn btn-space btn-primary'">500</button>
+            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default':'btn btn-space btn-primary'">All</button>
           </div>
         </div>
       </div>
