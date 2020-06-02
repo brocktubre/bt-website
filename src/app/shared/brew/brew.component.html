@@ -44,8 +44,8 @@
           <h4>Apparent Attenuation: <strong>{{ apparent_attenuation }}</strong></h4>
         </div>
       </div>
-      <div class="row">
-        <div class="dropdown col-md-3 col-md-offset-10 col-sm-12 filter-readings">
+      <div class="row text-center" style="padding-bottom: 50px;">
+        <!-- <div class="dropdown col-md-4 col-md-offset-4 col-sm-12 filter-readings">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
@@ -56,6 +56,18 @@
             <li *ngIf='num_of_readings >= 500'><a (click)='filterReadings(500)'>500</a></li>
             <li><a (click)='filterReadings(-1)'>All</a></li>
           </ul>
+        </div> -->
+        <div class="col-md-4 col-sm-12 col-md-offset-8">
+          <span class="" style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
+          <br>
+          <div class="btn-group">
+            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-default':'btn btn-primary'">20</button>
+            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-default':'btn btn-primary'">50</button>
+            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-default':'btn btn-primary'">100</button>
+            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-default':'btn btn-primary'">200</button>
+            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-default':'btn btn-primary'">500</button>
+            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-default':'btn btn-primary'">All</button>
+          </div>
         </div>
       </div>
     </div>

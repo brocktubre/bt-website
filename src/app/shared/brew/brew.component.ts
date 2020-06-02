@@ -49,16 +49,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
     if (brewId === undefined) {
       this.filterReadings(this.num_of_results_to_show);
-      // refresh every 15 minutes.
-      setInterval(() => {
-        this.filterReadings(this.num_of_results_to_show);
-        }, 90000);
     } else {
       this.filterPreviousReadings(this.num_of_results_to_show, brewId);
-      // refresh every 15 minutes.
-      setInterval(() => {
-        this.filterPreviousReadings(this.num_of_results_to_show, brewId);
-        }, 90000);
     }
   }
 
@@ -417,6 +409,21 @@ export class BrewComponent implements OnInit, AfterViewInit {
         events: ['click', 'mousemove']
       }
     });
+  }
+
+  public highlightAll() {
+    if (this.num_of_results_to_show === this.stats_G.length) {
+      switch (this.num_of_results_to_show) {
+        case 20:
+        case 50:
+        case 100:
+        case 200:
+        case 500:
+          return false;
+        default:
+          return true;
+      }
+    }
   }
 
 
