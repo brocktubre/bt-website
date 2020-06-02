@@ -22,32 +22,31 @@
       <p> <strong>{{ errorMessage }}</strong></p>
     </div>
     <div *ngIf="!loadingStats && !isError">
-      <div class="row text-center" style="padding-top: 50px;">
-        <img [src]="embedded" class="rounded">
-      </div>
-      <div class="row text-center" style="padding-bottom: 10px;">
-        <h2> <strong>{{ brewName }}</strong></h2>
-        <h4><strong>Brew Date: {{ brewDate }}</strong></h4>
-        <h4>Temperature Units <span>{{ units ? '°F' : '°C' }}</span></h4>
-        <ui-switch (change)="onTempUnitChange($event)" [checked]="!units"></ui-switch>
-      </div>
-      <div class="row text-center" style="padding-bottom: 50px;">
-        <div class="col-md-4 col-sm-12" >
+      <div class="row">
+        <div class="col-md-3 col-sm-12" style="padding-top: 2.5%;">
+          <img [src]="embedded" class="rounded" (click)="goToLink(photosUrl)" />
+        </div>
+        <div class="col-md-5 col-sm-12">
+          <h2> <strong>{{ brewName }}</strong></h2>
+          <h4>Brew Date: <strong>{{ brewDate }}</strong></h4>
+          <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'"></ui-switch></span></h4>
           <h4>Latest Reading: <strong>{{ latestReading }}</strong></h4>
           <h4>Fermentation Day: <strong>{{ day }}</strong></h4>
           <h4>Total Readings: <strong>{{ num_of_readings }}</strong></h4>
         </div>
-        <div class="col-md-4 col-sm-12">
+        <div class="col-md-3 col-sm-12">
+          <br>
+          <br>
           <h4>Current Temperature: <strong>{{ latestTemp }}</strong></h4>
           <h4>Current Gravity: <strong>{{ latestGravity }}</strong></h4>
-        </div>
-        <div class="col-md-4 col-sm-12">
+          <hr>
           <h4>Original Gravity: <strong>{{ originalGravity }}</strong></h4>
           <h4>Current ABV: <strong>{{ currABV }}</strong></h4>
           <h4>Apparent Attenuation: <strong>{{ apparent_attenuation }}</strong></h4>
         </div>
       </div>
-      <div class="row text-center" style="padding-bottom: 50px;">
+
+      <div class="row text-center" style="padding-bottom: 50px; padding-top: 50px;">
         <!-- <div class="dropdown col-md-4 col-md-offset-4 col-sm-12 filter-readings">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
           <span class="caret"></span></button>
@@ -60,16 +59,16 @@
             <li><a (click)='filterReadings(-1)'>All</a></li>
           </ul>
         </div> -->
-        <div class="col-md-4 col-sm-12 col-md-offset-8">
-          <span class="" style="font-size: 16px;">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</span>
+        <div class="col-md-6 col-sm-12 col-md-offset-3">
+          <h3>Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</h3>
           <br>
           <div class="btn-group">
-            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default':'btn btn-space btn-primary'">20</button>
-            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default':'btn btn-space btn-primary'">50</button>
-            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default':'btn btn-space btn-primary'">100</button>
-            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default':'btn btn-space btn-primary'">200</button>
-            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default':'btn btn-space btn-primary'">500</button>
-            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default':'btn btn-space btn-primary'">All</button>
+            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">20</button>
+            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">50</button>
+            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">100</button>
+            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">200</button>
+            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">500</button>
+            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">All</button>
           </div>
         </div>
       </div>

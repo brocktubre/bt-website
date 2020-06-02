@@ -431,6 +431,11 @@ export class BrewComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public goToLink(url: string) {
+    window.open(url, '_blank');
+  }
+
+
 
 
 }

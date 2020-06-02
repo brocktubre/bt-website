@@ -30,7 +30,6 @@ export class PreviousBrewsComponent implements OnInit {
   }
 
   public goToLink(url: string) {
-    debugger;
     window.open(url, '_blank');
   }
 

@@ -151,6 +151,10 @@ ul.timeline > li:before {
   cursor: pointer;
 }
 
+.rounded:hover {
+  cursor: pointer;
+}
+
 .brew-heading {
   font-size: 32px;
   font-weight: 300;
@@ -189,6 +193,10 @@ ul.timeline > li:before {
 img.rounded {
   object-fit: cover;
   border-radius: 50%;
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 200px;
+}
+
+.btn-group > .btn {
+  font-size: 18px;
 }

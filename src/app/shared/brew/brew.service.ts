@@ -95,6 +95,7 @@ export class BrewService {
               stat.temperature = reading.gsx$temp.$t;
               stat.photos_url = url.feed.entry[cellNumber].gsx$photosurl.$t;
               stat.embedded = url.feed.entry[cellNumber].gsx$embedded.$t;
+              stat.id = id;
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
