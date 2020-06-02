@@ -5,4 +5,5 @@ export class BrewStatsObj {
   public temperature: number;
   public gravity: number;
   public brew_name: string;
+  public photos_url: string;
 }

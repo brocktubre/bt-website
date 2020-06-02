@@ -34,6 +34,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public apparent_attenuation: string;
   public isError = false;
   public errorMessage: string;
+  public photosUrl: string;
 
   @ViewChild('brewID') brewID: ElementRef;
 
@@ -49,16 +50,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
 
     if (brewId === undefined) {
       this.filterReadings(this.num_of_results_to_show);
-      // refresh every 15 minutes.
-      setInterval(() => {
-        this.filterReadings(this.num_of_results_to_show);
-        }, 90000);
     } else {
       this.filterPreviousReadings(this.num_of_results_to_show, brewId);
-      // refresh every 15 minutes.
-      setInterval(() => {
-        this.filterPreviousReadings(this.num_of_results_to_show, brewId);
-        }, 90000);
     }
   }
 
@@ -278,6 +271,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     const date = moment(new Date(this.stats_G[0].date)).format('MM/DD/YY');
     // date.add(1, 'month'); // date operations follow date-math logic
     this.brewDate = date;
+    this.photosUrl = this.stats_G[0].photos_url;
   }
 
   public onTempUnitChange($event) {
@@ -417,6 +411,21 @@ export class BrewComponent implements OnInit, AfterViewInit {
         events: ['click', 'mousemove']
       }
     });
+  }
+
+  public highlightAll() {
+    if (this.num_of_results_to_show === this.stats_G.length) {
+      switch (this.num_of_results_to_show) {
+        case 20:
+        case 50:
+        case 100:
+        case 200:
+        case 500:
+          return false;
+        default:
+          return true;
+      }
+    }
   }
 
 

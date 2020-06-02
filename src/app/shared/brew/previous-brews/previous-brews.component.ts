@@ -29,4 +29,9 @@ export class PreviousBrewsComponent implements OnInit {
     this.router.navigate(['/brew/' + id]);
   }
 
+  public goToLink(url: string) {
+    debugger;
+    window.open(url, '_blank');
+  }
+
 }
