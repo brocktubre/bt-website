@@ -19,17 +19,17 @@ export class BrewService {
     const httpOptions = {
       headers: headers
     };
-    const getUrl = environment.brewStats.jsonUrl;
+    const getUrl = environment.brewStats.jsonUrlPreviousBrews;
     const getWorkingURL = this.http.get(getUrl, httpOptions);
     getWorkingURL.subscribe((url: any) => {
       if (url.feed.entry === undefined) {
         sendResult.error('There was an error getting the URL for the brew stats.');
       }
 
-      let workingURL = url.feed.entry[0].gsx$url.$t;
-      if (environment.production) {
-        workingURL = url.feed.entry[1].gsx$url.$t;
-      }
+      const workingURL = url.feed.entry[url.feed.entry.length - 1].gsx$brewurl.$t;
+      // if (environment.production) {
+      //   workingURL = url.feed.entry[1].gsx$url.$t;
+      // }
 
       const getAllBrewStats = this.http.get(workingURL, httpOptions);
       getAllBrewStats.subscribe((results: any) => {
@@ -42,6 +42,8 @@ export class BrewService {
               stat.date = date;
               stat.gravity = reading.gsx$sg.$t;
               stat.temperature = reading.gsx$temp.$t;
+              stat.photos_url = url.feed.entry[url.feed.entry.length - 1].gsx$photosurl.$t;
+              // stat.brew_name = previousBrews.gsx$brewname.$t;
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
@@ -90,6 +92,7 @@ export class BrewService {
               stat.date = date;
               stat.gravity = reading.gsx$sg.$t;
               stat.temperature = reading.gsx$temp.$t;
+              stat.photos_url = url.feed.entry[cellNumber].gsx$photosurl.$t;
               brewStats.push(stat);
               brewStats[0].brew_name = results.feed.entry[0].gsx$beer.$t;
             });
@@ -138,6 +141,23 @@ export class BrewService {
       }
     }, (error) => {
         sendResult.error('There was an retrieveing working URL.');
+    });
+    return sendResult.asObservable();
+  }
+
+  public getBrewPhotos(url: string): Observable<Array<any>> {
+    const sendResult = new Subject<Array<any>>();
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json;');
+    const httpOptions = {
+      headers: headers
+    };
+    const getImages = this.http.get(url, httpOptions);
+    getImages.subscribe((photos: any) => {
+     debugger;
+    }, (error) => {
+      sendResult.error('There was an retrieveing brew images.');
     });
     return sendResult.asObservable();
   }

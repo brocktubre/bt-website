@@ -34,6 +34,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public apparent_attenuation: string;
   public isError = false;
   public errorMessage: string;
+  public photosUrl: string;
 
   @ViewChild('brewID') brewID: ElementRef;
 
@@ -270,6 +271,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     const date = moment(new Date(this.stats_G[0].date)).format('MM/DD/YY');
     // date.add(1, 'month'); // date operations follow date-math logic
     this.brewDate = date;
+    this.photosUrl = this.stats_G[0].photos_url;
   }
 
   public onTempUnitChange($event) {
