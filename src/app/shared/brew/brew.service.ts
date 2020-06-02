@@ -128,6 +128,7 @@ export class BrewService {
           prevBrew.id = brewId;
           prevBrew.brew_name = previousBrews.gsx$brewname.$t;
           prevBrew.date = previousBrews.gsx$brewdate.$t;
+          prevBrew.photos_url = previousBrews.gsx$photosurl.$t;
           brewId++;
           previousBrewsList.push(prevBrew);
         });

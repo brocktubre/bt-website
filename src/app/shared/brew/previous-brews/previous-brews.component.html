@@ -19,6 +19,7 @@
               <th>Brew Name</th>
               <th>Brew Date</th>
               <th>See Brew Stats</th>
+              <th>See Some Images</th>
           </tr>
       </thead>
       <tbody>
@@ -31,6 +32,9 @@
               </td>
               <td>
                 <i class="fa fa-link fa-bt-link prev-brew" (click)="navigateToBrewStats(brew.id)"></i>
+              </td>
+              <td>
+                <i class="fa fa-photo prev-brew" (click)="goToLink(brew.photos_url)"></i>
               </td>
           </tr>
       </tbody>
