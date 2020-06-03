@@ -3,9 +3,11 @@
 <div class="container-fluid background" style="padding: 0;" >
   <div class="container" style="padding-bottom: 50px;">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-4 col-sm-12">
         <i class="fa fa-beer fa-2x"></i><span class="brew-heading"> BREW <span class="text-primary brew-heading">STATS</span></span>
-          <span class="pull-right" style="margin-top: 15px;"><strong><a href="/brew/all">Looking for previous brews?</a></strong></span>
+      </div>
+      <div class="col-md-4 col-md-offset-4 col-sm-12 text-center" style="padding-top: 1%;">
+        <span style="margin-top: 15px;"><strong><a href="/brew/all">Looking for previous brews?</a></strong></span>
       </div>
     </div>
     <hr>
@@ -29,7 +31,7 @@
         <div class="col-md-5 col-sm-12">
           <h2> <strong>{{ brewName }}</strong></h2>
           <h4>Brew Date: <strong>{{ brewDate }}</strong></h4>
-          <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'"></ui-switch></span></h4>
+          <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'" style="padding-left: 15px;"></ui-switch></span></h4>
           <h4>Latest Reading: <strong>{{ latestReading }}</strong></h4>
           <h4>Fermentation Day: <strong>{{ day }}</strong></h4>
           <h4>Total Readings: <strong>{{ num_of_readings }}</strong></h4>
@@ -59,16 +61,16 @@
             <li><a (click)='filterReadings(-1)'>All</a></li>
           </ul>
         </div> -->
-        <div class="col-md-6 col-sm-12 col-md-offset-3">
+        <div class="col-md-6 col-sm-12 col-md-offset-3 col-xs-12">
           <h3>Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</h3>
           <br>
           <div class="btn-group">
-            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">20</button>
-            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">50</button>
-            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">100</button>
-            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">200</button>
-            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">500</button>
-            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default btn-lg':'btn btn-space btn-primary btn-lg'">All</button>
+            <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default':'btn btn-space btn-primary'">20</button>
+            <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default':'btn btn-space btn-primary'">50</button>
+            <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default':'btn btn-space btn-primary'">100</button>
+            <button *ngIf='num_of_readings >= 200' (click)='filterReadings(200)' type="button" [ngClass]="(num_of_results_to_show === 200)?'btn btn-space btn-default':'btn btn-space btn-primary'">200</button>
+            <button *ngIf='num_of_readings >= 500' (click)='filterReadings(500)' type="button" [ngClass]="(num_of_results_to_show === 500)?'btn btn-space btn-default':'btn btn-space btn-primary'">500</button>
+            <button (click)='filterReadings(-1)' type="button" [ngClass]="(highlightAll())?'btn btn-space btn-default':'btn btn-space btn-primary'">All</button>
           </div>
         </div>
       </div>
