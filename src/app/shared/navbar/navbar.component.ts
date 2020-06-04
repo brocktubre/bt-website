@@ -57,11 +57,16 @@ export class NavbarComponent implements OnInit {
           this.titleService.setTitle('Login | Brock Tubre');
           break;
         case '/brew':
-            this.isLoginActive = true;
+        case '/brew/all':
             this.titleService.setTitle('Homebrewing | Brock Tubre');
             break;
-        default:
+        default: {
+          if (url.includes('/brew')) {
+            this.titleService.setTitle('Homebrewing | Brock Tubre');
+            break;
+          }
           this.titleService.setTitle('Brock Tubre');
+        }
         break;
     }
 
