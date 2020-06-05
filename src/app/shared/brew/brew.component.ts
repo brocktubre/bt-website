@@ -261,7 +261,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.apparent_attenuation = (((this.originalGravity - parseFloat(this.latestGravity)) / (this.originalGravity - 1)) * 100).toFixed(2).toString() + '%';
 
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
-    this.day = this.day + 1;
+    this.day = this.day;
     this.brewName = this.stats_G[0].brew_name;
     // All of this is depreicated for moment. Getting the following warning:
     // Deprecation warning: value provided is not in a recognized RFC2822 or ISO format.
@@ -371,8 +371,8 @@ export class BrewComponent implements OnInit, AfterViewInit {
             },
             ticks: {
               fontSize: 14,
-              max: this.units ? 85 : 40,
-              min: this.units ? 30 : 4,
+              max: this.units ? 80 : 27,
+              min: this.units ? 45 : 7,
               stepSize: this.units ? 3 : 2
             }
           }, {

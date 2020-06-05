@@ -141,10 +141,10 @@ export class BrewService {
         });
         sendResult.next(previousBrewsList);
       } else {
-        sendResult.error('There was an retrieveing previous brews list.');
+        sendResult.error('There was an error retrieveing previous brews list.');
       }
     }, (error) => {
-        sendResult.error('There was an retrieveing working URL.');
+        sendResult.error('There was an error retrieveing working URL.');
     });
     return sendResult.asObservable();
   }
