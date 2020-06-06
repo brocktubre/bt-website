@@ -20,6 +20,7 @@
           <tr>
               <th>Brew Name</th>
               <th>Brew Date</th>
+              <th>Fermentation Complete</th>
               <th>Stats</th>
               <th>Images</th>
           </tr>
@@ -31,6 +32,10 @@
               </td>
               <td>
                   <span class="prev-brew" (click)="navigateToBrewStats(brew.id)">{{brew.date}}</span>
+              </td>
+              <td>
+                <span *ngIf="brew.done" class="prev-brew" (click)="navigateToBrewStats(brew.id)">Yes</span>
+                <span *ngIf="!brew.done" class="prev-brew" (click)="navigateToBrewStats(brew.id)">No</span>
               </td>
               <td>
                 <i class="fa fa-link fa-bt-link prev-brew" (click)="navigateToBrewStats(brew.id)"></i>
