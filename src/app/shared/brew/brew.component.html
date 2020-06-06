@@ -33,7 +33,7 @@
           <h4>Brew Date: <strong>{{ brewDate }}</strong></h4>
           <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'" style="padding-left: 15px;"></ui-switch></span></h4>
           <h4>Latest Reading: <strong>{{ latestReading }}</strong></h4>
-          <h4><span *ngIf="doneFermenting">Total Days Fermented:</span><span *ngIf="!doneFermenting">Current Day:</span> <strong>{{ day }}</strong></h4>
+          <h4><span *ngIf="doneFermenting">Total Days Fermented:</span><span *ngIf="!doneFermenting">Fermentation Day:</span> <strong>{{ day }}</strong></h4>
           <h4>Total Readings: <strong>{{ num_of_readings }}</strong></h4>
         </div>
         <div class="col-md-3 col-sm-12">
