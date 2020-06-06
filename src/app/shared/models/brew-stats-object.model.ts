@@ -7,4 +7,5 @@ export class BrewStatsObj {
   public brew_name: string;
   public photos_url: string;
   public embedded: string;
+  public done: boolean;
 }

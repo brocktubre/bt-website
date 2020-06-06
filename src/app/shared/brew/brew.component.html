@@ -33,17 +33,17 @@
           <h4>Brew Date: <strong>{{ brewDate }}</strong></h4>
           <h4>Temperature Units <span>{{ units ? '°F' : '°C' }} <ui-switch (change)="onTempUnitChange($event)" [checked]="!units" [size]="'small'" style="padding-left: 15px;"></ui-switch></span></h4>
           <h4>Latest Reading: <strong>{{ latestReading }}</strong></h4>
-          <h4>Fermentation Day: <strong>{{ day }}</strong></h4>
+          <h4><span *ngIf="doneFermenting">Total Days Fermented:</span><span *ngIf="!doneFermenting">Current Day:</span> <strong>{{ day }}</strong></h4>
           <h4>Total Readings: <strong>{{ num_of_readings }}</strong></h4>
         </div>
         <div class="col-md-3 col-sm-12">
           <br>
           <br>
-          <h4>Current Temperature: <strong>{{ latestTemp }}</strong></h4>
-          <h4>Current Gravity: <strong>{{ latestGravity }}</strong></h4>
+          <h4><span *ngIf="doneFermenting">Final</span><span *ngIf="!doneFermenting">Current</span> Temperature: <strong>{{ latestTemp }}</strong></h4>
+          <h4><span *ngIf="doneFermenting">Final</span><span *ngIf="!doneFermenting">Current</span> Gravity: <strong>{{ latestGravity }}</strong></h4>
           <hr>
           <h4>Original Gravity: <strong>{{ originalGravity }}</strong></h4>
-          <h4>Current ABV: <strong>{{ currABV }}</strong></h4>
+          <h4><span *ngIf="doneFermenting">Final</span><span *ngIf="!doneFermenting">Current</span> ABV: <strong>{{ currABV }}</strong></h4>
           <h4>Apparent Attenuation: <strong>{{ apparent_attenuation }}</strong></h4>
         </div>
       </div>
@@ -62,9 +62,10 @@
           </ul>
         </div> -->
         <div class="col-md-6 col-sm-12 col-md-offset-3 col-xs-12">
-          <h3>Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</h3>
+          <h3 *ngIf="stats_G.length >= 20">Showing <span *ngIf="num_of_results_to_show !== -1">{{ num_of_results_to_show }}</span> Readings</h3>
+          <h3 *ngIf="stats_G.length < 20">Showing <span>{{ stats_G.length }}</span> Readings</h3>
           <br>
-          <div class="btn-group">
+          <div *ngIf='stats_G.length >= 20' class="btn-group">
             <button *ngIf='num_of_readings >= 20' (click)='filterReadings(20)' type="button" [ngClass]="(num_of_results_to_show === 20)?'btn btn-space btn-default':'btn btn-space btn-primary'">20</button>
             <button *ngIf='num_of_readings >= 50' (click)='filterReadings(50)' type="button" [ngClass]="(num_of_results_to_show === 50)?'btn btn-space btn-default':'btn btn-space btn-primary'">50</button>
             <button *ngIf='num_of_readings >= 100' (click)='filterReadings(100)' type="button" [ngClass]="(num_of_results_to_show === 100)?'btn btn-space btn-default':'btn btn-space btn-primary'">100</button>

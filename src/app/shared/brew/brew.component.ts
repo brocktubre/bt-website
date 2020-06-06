@@ -37,6 +37,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
   public errorMessage: string;
   public photosUrl: string;
   public embedded: string;
+  public doneFermenting: boolean;
 
   @ViewChild('brewID') brewID: ElementRef;
 
@@ -263,6 +264,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
     this.day = Math.round(((new Date(this.latestReading)).valueOf() - (new Date(this.stats_G[0].date)).valueOf()) / (1000 * 60 * 60 * 24));
     this.day = this.day;
     this.brewName = this.stats_G[0].brew_name;
+    this.doneFermenting = this.stats_G[0].done;
     // All of this is depreicated for moment. Getting the following warning:
     // Deprecation warning: value provided is not in a recognized RFC2822 or ISO format.
     // moment construction falls back to js Date(),
