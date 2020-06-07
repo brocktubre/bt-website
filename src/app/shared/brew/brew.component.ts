@@ -157,8 +157,10 @@ export class BrewComponent implements OnInit, AfterViewInit {
   }
 
   public filterPreviousReadings(num: number, brewId: number) {
+
     this.num_of_results_to_show = num;
     this.brewService.getPreviousBrewStats(brewId).subscribe((stats) => {
+      debugger;
       // Are there any results?
       if (stats.length > 0) {
         this.stats_G = stats;
