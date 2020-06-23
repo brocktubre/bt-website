@@ -27,8 +27,10 @@
       </thead>
       <tbody>
           <tr *ngFor="let brew of previousBrewsList">
+
               <td>
-                 <span class="prev-brew" (click)="navigateToBrewStats(brew.id)">{{brew.brew_name}}</span>
+                  <img [src]="brew.embedded" class="square prev-brew" (click)="navigateToBrewStats(brew.id)" />
+                  <span class="prev-brew" (click)="navigateToBrewStats(brew.id)">{{brew.brew_name}}</span>
               </td>
               <td>
                   <span class="prev-brew" (click)="navigateToBrewStats(brew.id)">{{brew.date}}</span>

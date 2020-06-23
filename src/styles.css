@@ -162,6 +162,8 @@ ul.timeline > li:before {
 
 .prev-brew {
   cursor: pointer;
+  vertical-align: middle;
+  font-size: 18px;
 }
 
 .thumb-img{
@@ -197,6 +199,19 @@ img.rounded {
   width: 200px;
 }
 
+img.square {
+  object-fit: cover;
+  border-radius: 0%;
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+}
+
 .btn-group > .btn {
   font-size: 18px;
 }
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+}
+
